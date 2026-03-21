@@ -102,6 +102,17 @@ button,input,select{font-family:inherit}
 .exp-old{color:var(--red);font-weight:700}
 .del-btn{font-size:22px;color:var(--text3);cursor:pointer;padding:6px;line-height:1}
 .del-btn:active{color:var(--red)}
+.edit-btn{font-size:18px;color:var(--text3);cursor:pointer;padding:6px;line-height:1;transition:color .15s;background:none;border:none}
+.edit-btn:active,.edit-btn:hover{color:var(--blue)}
+
+/* Modal imagen preview grande */
+.modal-img-wrap{position:relative;margin-bottom:10px}
+.modal-img-preview{width:100%;height:170px;object-fit:contain;border-radius:var(--r-sm);background:var(--surface2);display:block;border:1.5px solid var(--border)}
+.modal-img-placeholder{width:100%;height:170px;border-radius:var(--r-sm);background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:64px;border:1.5px solid var(--border)}
+
+/* Import tool button */
+.tool-btn.import-btn{color:var(--blue);border-color:var(--blue)}
+.tool-btn.import-btn:hover{background:var(--blue-bg)}
 
 /* PILLS */
 .pill{display:inline-flex;align-items:center;font-size:var(--fs-sm);font-weight:700;padding:4px 10px;border-radius:24px;white-space:nowrap}
@@ -277,7 +288,7 @@ button,input,select{font-family:inherit}
 <body>
 
 <header class="header">
-  <div class="header-title">🥦 Mi <span>Despensa</span></div>
+  <div class="header-title">🥦 <span>Despensa V9.0</span></div>
   <div class="header-actions">
     <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
     <button class="add-btn" onclick="openAdd()">
@@ -304,10 +315,15 @@ button,input,select{font-family:inherit}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           Imágenes
         </button>
-        <button class="tool-btn" onclick="exportStockCSV()" title="Descargar stock como CSV">
+        <button class="tool-btn" onclick="exportStockJSON()" title="Descargar stock como JSON">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar stock
+          Exportar JSON
         </button>
+        <label class="tool-btn import-btn" for="import-json-input" title="Cargar stock desde JSON">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Importar JSON
+        </label>
+        <input type="file" id="import-json-input" accept=".json,application/json" style="display:none" onchange="importStockJSON(this)">
       </div>
       <div class="search-wrap">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -324,7 +340,7 @@ button,input,select{font-family:inherit}
         <strong>📷 Cómo escanear:</strong><br>
         • <strong>Escáner en vivo</strong>: presioná "Iniciar cámara" → apuntá al código.<br>
         • <strong>Tomar foto</strong>: si el escáner no abre, usá este botón — siempre funciona.<br>
-        • Busca en <strong>%DIA · go-upc · Open Food Facts · Precios Claros</strong> — muestra imagen y precio.
+        • Busca primero en <strong>go-upc.com</strong>, luego verifica precio en <strong>%DIA</strong> — fallback a Open Food Facts y Precios Claros.
       </div>
       <div id="qr-reader"></div>
       <div class="photo-btn-wrap">
@@ -338,7 +354,7 @@ button,input,select{font-family:inherit}
       <input class="code-input" type="number" id="code-input" placeholder="Ej: 7790895000123" inputmode="numeric" oninput="onCodeInput(this.value)">
       <button class="btn btn-green" id="lookup-btn" onclick="doLookup()" disabled>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        Buscar en %DIA / go-upc / Open Food Facts / Precios Claros
+        Buscar en go-upc · %DIA · Open Food Facts · Precios Claros
       </button>
       <div id="scan-result"></div>
     </div>
@@ -455,14 +471,26 @@ Ejemplo:
   <div class="modal" id="modal">
     <div class="modal-handle"></div>
     <div class="modal-head">
-      <h2>Agregar producto</h2>
+      <h2 id="modal-title">Agregar producto</h2>
       <span class="modal-close" onclick="closeModal()">×</span>
     </div>
     <div class="modal-body">
       <div class="api-from" id="api-from"></div>
+
+      <!-- Preview imagen grande -->
+      <div class="modal-img-wrap" id="modal-img-wrap">
+        <div class="modal-img-placeholder" id="modal-img-placeholder">🛒</div>
+      </div>
+
+      <div class="field">
+        <label>URL de imagen (opcional)</label>
+        <input type="url" id="f-image" placeholder="https://go-upc.s3.amazonaws.com/images/..."
+          oninput="previewModalImage(this.value)">
+      </div>
+
       <div class="field"><label>Nombre *</label><input type="text" id="f-name" placeholder="Ej: Arroz integral"></div>
       <div class="field"><label>Marca</label><input type="text" id="f-brand" placeholder="Ej: Gallo"></div>
-      <div class="field"><label>Código de barras</label><input type="number" id="f-bar" placeholder="Ej: 7790895000123" readonly style="opacity:.6;font-family:monospace;font-size:14px"></div>
+      <div class="field"><label>Código de barras</label><input type="text" id="f-bar" placeholder="Ej: 7790895000123" style="font-family:monospace;font-size:14px"></div>
       <div class="field-row">
         <div class="field"><label>Cantidad actual *</label><input type="number" id="f-qty" min="0" value="1" inputmode="numeric"></div>
         <div class="field"><label>Mínimo para alerta</label><input type="number" id="f-min" min="0" value="1" inputmode="numeric"></div>
@@ -489,7 +517,7 @@ Ejemplo:
     </div>
     <div class="modal-foot">
       <button class="btn" style="margin-top:0" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-green" style="margin-top:0" onclick="saveProduct()">Guardar producto</button>
+      <button class="btn btn-green" style="margin-top:0" onclick="saveOrUpdateProduct()">Guardar</button>
     </div>
   </div>
 </div>
@@ -615,7 +643,11 @@ function renderStock() {
           <span class="qty-val">${p.qty}</span>
           <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">${expH}<button class="del-btn" onclick="deleteProduct(${p.id})">🗑</button></div>
+        <div style="display:flex;align-items:center;gap:4px">
+          ${expH}
+          <button class="edit-btn" onclick="openEdit(${p.id})" title="Editar producto" aria-label="Editar">✏️</button>
+          <button class="del-btn" onclick="deleteProduct(${p.id})" aria-label="Eliminar">🗑</button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -675,130 +707,204 @@ function scanFromPhoto(input) {
 
 // ── APIs ──────────────────────────────────────
 
-// ── DIA Argentina — HTML SSR, precio real ──────
+// ── DIA Argentina — precio real argentino actualizado ─────────────
 async function fetchDIA(barcode) {
-  // DIA busca por EAN directamente en la URL; devuelve HTML con resultados SSR
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://diaonline.supermercadosdia.com.ar/' + barcode)}`;
-  const res = await fetch(proxyUrl);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const json = await res.json();
-  const html = json.contents || '';
+  const targetUrl = `https://diaonline.supermercadosdia.com.ar/${barcode}`;
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+  ];
+
+  let html = '';
+  for (const proxyUrl of proxies) {
+    try {
+      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+      if (!res.ok) continue;
+      const ct = res.headers.get('content-type') || '';
+      if (ct.includes('json')) {
+        const json = await res.json();
+        html = json.contents || json.body || '';
+      } else {
+        html = await res.text();
+      }
+      if (html && html.includes('diaonline')) break;
+    } catch(e) { console.warn('DIA proxy error', proxyUrl, e); }
+  }
   if (!html) return null;
 
   const doc = new DOMParser().parseFromString(html, 'text/html');
 
-  // Nombre: el <h3> dentro de la card de resultado o el <h1> en página de producto
+  // Nombre: h3 o h1 con contenido de producto
   let name = '';
-  const h3 = doc.querySelector('.vtex-product-summary-2-x-productBrand, h3.vtex-product-summary-2-x-productNameContainer, h3');
-  if (h3) name = h3.textContent.trim();
-  // Alternativa: buscar el primer <a> con título de producto
+  for (const el of doc.querySelectorAll('h1, h3')) {
+    const t = el.textContent.trim();
+    if (t.length > 5 && !/seguir|finalizar|repetir|ofertas|folleto|logo/i.test(t)) {
+      name = t; break;
+    }
+  }
+  // Fallback: <a href="/p"> que no sea nav
   if (!name) {
-    const links = doc.querySelectorAll('a[href*="/p"]');
-    for (const a of links) {
+    for (const a of doc.querySelectorAll('a[href$="/p"]')) {
       const t = a.textContent.trim();
-      if (t.length > 6 && !/seguir|finalizar|repetir|ofertas|folleto/i.test(t)) { name = t; break; }
+      if (t.length > 6) { name = t; break; }
     }
   }
   if (!name) return null;
 
-  // Imagen: buscar en vtexassets con tamaño grande
+  // Imagen: vtexassets con id numérico
   let image = '';
-  for (const img of doc.querySelectorAll('img')) {
-    const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
-    if (src.includes('vtexassets.com') && src.includes('arquivos/ids')) {
-      // Pedir tamaño 500px
-      image = src.replace(/width=\d+/, 'width=500').replace(/-\d+-auto/, '-500-auto');
-      break;
+  // Regex sobre HTML crudo — más fiable que DOM cuando proxy reescribe src
+  const imgMatch = html.match(/https?:\/\/ardiaprod\.vtexassets\.com\/arquivos\/ids\/\d+[^"'\s]*/);
+  if (imgMatch) {
+    // Pedir versión 500px
+    image = imgMatch[0].replace(/width=\d+/, 'width=500').replace(/-\d+-auto/, '-500-auto');
+  }
+  if (!image) {
+    for (const img of doc.querySelectorAll('img')) {
+      const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+      if (src.includes('vtexassets')) { image = src; break; }
     }
   }
 
-  // Precio actual: buscar el número formateado "$X.XXX" o "$ X.XXX"
+  // Precio: buscar patrones "$X.XXX" o "$ X.XXX,XX" en el HTML crudo
   let price = 0, priceOrig = 0;
-  const bodyText = doc.body ? doc.body.innerHTML : '';
-  // Precio con descuento (el menor, aparece destacado)
-  const priceMatches = [...bodyText.matchAll(/\$\s*([\d.,]+)/g)]
+  const priceNums = [...html.matchAll(/\$\s*([\d.]+(?:,\d{2})?)/g)]
     .map(m => parseARS(m[1]))
-    .filter(n => n > 100)
-    .sort((a,b) => a - b);
-  if (priceMatches.length) {
-    price = priceMatches[0];
-    if (priceMatches.length > 1) priceOrig = priceMatches[priceMatches.length - 1];
+    .filter(n => n > 10 && n < 10_000_000)
+    .sort((a, b) => a - b);
+  if (priceNums.length) {
+    price = priceNums[0];
+    if (priceNums.length > 1) priceOrig = priceNums[priceNums.length - 1];
+    if (priceOrig === price) priceOrig = 0;
   }
 
-  // Marca: texto en negrita cerca del nombre o atributo "Marca"
+  // Marca: mayúsculas cerca de "Referencia" o nodo con clase brandName
   let brand = '';
-  const brandEl = doc.querySelector('.vtex-product-summary-2-x-brandName, [class*="brandName"]');
+  const brandEl = doc.querySelector('[class*="brandName"], [class*="brand-name"]');
   if (brandEl) brand = brandEl.textContent.trim();
-  // Fallback: buscar "Referencia:" y tomar el texto previo como marca
   if (!brand) {
-    const refEl = [...doc.querySelectorAll('*')].find(el => el.textContent.includes('Referencia:'));
-    if (refEl) {
-      // La marca suele estar en un elemento hermano previo en mayúsculas
-      const prev = refEl.previousElementSibling;
-      if (prev && /^[A-ZÁÉÍÓÚ\s]+$/.test(prev.textContent.trim()) && prev.textContent.trim().length < 30) {
-        brand = prev.textContent.trim();
-      }
-    }
+    const refMatch = html.match(/Referencia[^<]*<\/[^>]+>\s*<[^>]+>\s*([A-ZÁÉÍÓÚÑÜ]{2,}[A-ZÁÉÍÓÚÑÜa-záéíóúñü\s]*)/);
+    if (refMatch) brand = refMatch[1].trim();
   }
 
-  // Categoría: breadcrumb (Bebidas > Gaseosas > Tónica)
+  // Categoría desde breadcrumb
   let cat_raw = '';
-  const breadcrumbs = doc.querySelectorAll('[class*="breadcrumb"] a, nav a');
-  if (breadcrumbs.length) cat_raw = [...breadcrumbs].map(a => a.textContent.trim()).join(' > ');
+  const bcItems = [...doc.querySelectorAll('[class*="breadcrumb"] a, nav[aria-label] a')];
+  if (bcItems.length > 1) cat_raw = bcItems.map(a => a.textContent.trim()).join(' > ');
 
-  // qty_label del nombre (ej: "2,25 Lt." → "2.25 l")
-  const qtyMatch = name.match(/(\d[\d.,]*)\s*(kg|gr?s?|ml|lt?\.?|litro|cc)\b/i);
+  const qtyMatch = name.match(/(\d[\d.,]*)\s*(kg|gr?s?|ml|lt?\.?|litro|cc|g)\b/i);
   const qty_label = qtyMatch ? qtyMatch[0] : '';
 
   return { name, brand, image, qty_label, cat_raw, price, priceOrig, src: 'dia' };
 }
-// ── go-upc.com — scraping via proxy CORS ──────
+// ── go-upc.com — fuente principal de identificación ──────────────────
+// HTML SSR limpio: h1 = nombre, img[src*=s3] = imagen, tabla = EAN/Brand/Category
 async function fetchGoUPC(barcode) {
-  // Usamos allorigins como proxy CORS-free para leer el HTML de go-upc
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://go-upc.com/search?q=' + barcode)}`;
-  const res = await fetch(proxyUrl);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const json = await res.json();
-  const html = json.contents || '';
+  const targetUrl = `https://go-upc.com/search?q=${barcode}`;
+
+  // Intentar con dos proxies CORS alternativos
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+  ];
+
+  let html = '';
+  for (const proxyUrl of proxies) {
+    try {
+      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+      if (!res.ok) continue;
+      const ct = res.headers.get('content-type') || '';
+      if (ct.includes('json')) {
+        const json = await res.json();
+        html = json.contents || json.body || '';
+      } else {
+        html = await res.text();
+      }
+      if (html && html.includes('go-upc')) break;
+    } catch(e) { console.warn('proxy error', proxyUrl, e); }
+  }
+
   if (!html) return null;
 
-  // Parsear el HTML con DOMParser (seguro, no ejecuta scripts)
+  // ── Parsear con DOMParser ──────────────────────────────────────────
   const doc = new DOMParser().parseFromString(html, 'text/html');
 
-  // Nombre del producto: <h1> principal
-  const h1 = doc.querySelector('h1');
-  const name = h1 ? h1.textContent.trim() : '';
-  if (!name) return null;
-
-  // Imagen: primera <img> cuyo src apunte a go-upc.s3.amazonaws.com
-  let image = '';
-  for (const img of doc.querySelectorAll('img')) {
-    const src = img.getAttribute('src') || '';
-    if (src.includes('go-upc.s3.amazonaws.com') || src.includes('go-upc.s3')) {
-      image = src;
-      break;
+  // Nombre: <h1> principal (excluir "Go-UPC" del header)
+  let name = '';
+  for (const h1 of doc.querySelectorAll('h1')) {
+    const t = h1.textContent.trim();
+    if (t && t.length > 4 && !t.toLowerCase().includes('go-upc')) {
+      name = t; break;
     }
   }
 
-  // Marca y categoría: de la tabla de atributos
+  // Si el <title> tiene el nombre antes del "— EAN", extraerlo como backup
+  if (!name) {
+    const title = doc.querySelector('title');
+    if (title) {
+      const m = title.textContent.match(/^(.+?)\s*—\s*EAN/);
+      if (m) name = m[1].trim();
+    }
+  }
+
+  if (!name) return null;
+
+  // ── Imagen: múltiples estrategias ─────────────────────────────────
+  let image = '';
+
+  // 1. Buscar <img> cuyo src original contenga amazonaws.com/images
+  for (const img of doc.querySelectorAll('img')) {
+    for (const attr of ['src', 'data-src', 'data-original', 'data-lazy']) {
+      const val = img.getAttribute(attr) || '';
+      if (val.includes('amazonaws.com/images') || val.includes('go-upc.s3')) {
+        image = val;
+        break;
+      }
+    }
+    if (image) break;
+  }
+
+  // 2. Regex sobre el HTML crudo como backup (allorigins puede alterar src en el DOM)
+  if (!image) {
+    const m = html.match(/https:\/\/go-upc\.s3\.amazonaws\.com\/images\/[\w.-]+/);
+    if (m) image = m[0];
+  }
+
+  // 3. Buscar cualquier imagen que mencione el id numérico del producto
+  if (!image) {
+    const m = html.match(/https?:\/\/[^\s"']+amazonaws[^\s"']+\/images\/\d+[^\s"')]+/);
+    if (m) image = m[0];
+  }
+
+  // ── Tabla de atributos: Brand / Category ──────────────────────────
   let brand = '', cat_raw = '';
   doc.querySelectorAll('table tr').forEach(tr => {
     const cells = tr.querySelectorAll('td');
     if (cells.length >= 2) {
       const key = cells[0].textContent.trim().toLowerCase();
       const val = cells[1].textContent.trim();
-      if (key === 'brand') brand = val;
-      if (key === 'category') cat_raw = val;
+      if (key === 'brand' && val)    brand   = val;
+      if (key === 'category' && val) cat_raw = val;
     }
   });
 
-  // Descripción para extraer qty_label (ej: "550 Gr", "1 Kg")
-  const desc = doc.querySelector('.description, p') || null;
-  const descText = desc ? desc.textContent : name;
-  const qtyMatch = descText.match(/(\d[\d.,]*)\s*(kg|gr?s?|ml|l|litro|g)\b/i);
+  // Fallback brand desde regex si tabla no fue parseada
+  if (!brand) {
+    const m = html.match(/<td[^>]*>\s*Brand\s*<\/td>\s*<td[^>]*>\s*([^<]+)\s*<\/td>/i);
+    if (m) brand = m[1].trim();
+  }
+  if (!cat_raw) {
+    const m = html.match(/<td[^>]*>\s*Category\s*<\/td>\s*<td[^>]*>\s*([^<]+)\s*<\/td>/i);
+    if (m) cat_raw = m[1].trim();
+  }
+
+  // ── qty_label desde nombre o descripción ─────────────────────────
+  const descEl = doc.querySelector('p, .description');
+  const descText = descEl ? descEl.textContent : name;
+  const qtyMatch = (name + ' ' + descText).match(/(\d[\d.,]*)\s*(kg|gr?s?|ml|lt?\.?|litro|cc|g)\b/i);
   const qty_label = qtyMatch ? qtyMatch[0] : '';
 
-  return { name, brand, image, qty_label, cat_raw, src: 'goupc' };
+  return { name, brand, image, qty_label, cat_raw, price: 0, priceOrig: 0, src: 'goupc' };
 }
 
 async function fetchOpenFoodFacts(barcode) {
@@ -886,19 +992,42 @@ async function doLookup(code) {
     return;
   }
 
-  // Pipeline: DIA → go-upc → Open Food Facts → Precios Claros
-  const steps = [
-    { label: '%DIA Argentina',    fn: () => fetchDIA(code) },
-    { label: 'go-upc.com',        fn: () => fetchGoUPC(code) },
-    { label: 'Open Food Facts',   fn: () => fetchOpenFoodFacts(code) },
-    { label: 'Precios Claros AR', fn: () => fetchPreciosClaros(code) },
-  ];
+  // ── Estrategia: go-upc primero (mejor cobertura de EAN argentinos)
+  // Si encuentra el producto, consulta DIA en paralelo para capturar precio real.
+  // Si go-upc falla, cae a Open Food Facts → Precios Claros → DIA.
+
+  setResult(`<div class="api-box api-load"><div class="api-title"><span class="spin"></span> Consultando go-upc.com…</div></div>`);
 
   let found = null;
-  for (const step of steps) {
-    setResult(`<div class="api-box api-load"><div class="api-title"><span class="spin"></span> Consultando ${step.label}…</div></div>`);
-    try { found = await step.fn(); } catch(e) { console.warn(step.label, e); }
-    if (found && found.name) break;
+  let diaData = null;
+
+  // 1. go-upc — fuente principal de identificación
+  try { found = await fetchGoUPC(code); } catch(e) { console.warn('go-upc', e); }
+
+  if (found && found.name) {
+    // go-upc encontró el producto → consultar DIA en paralelo para precio real
+    setResult(`<div class="api-box api-load"><div class="api-title"><span class="spin"></span> Encontrado en go-upc — verificando precio en %DIA…</div></div>`);
+    try { diaData = await fetchDIA(code); } catch(e) { console.warn('DIA (precio)', e); }
+
+    // Fusionar: go-upc aporta imagen/nombre/marca, DIA aporta precio
+    if (diaData) {
+      if (diaData.price > 0)  found.price     = diaData.price;
+      if (diaData.priceOrig > 0) found.priceOrig = diaData.priceOrig;
+      // Si DIA tiene mejor imagen (más grande), preferirla
+      if (diaData.image && diaData.image.includes('vtexassets')) found.image = diaData.image;
+    }
+  } else {
+    // go-upc no encontró → fallback secuencial
+    const fallbacks = [
+      { label: 'Open Food Facts',   fn: () => fetchOpenFoodFacts(code) },
+      { label: 'Precios Claros AR', fn: () => fetchPreciosClaros(code) },
+      { label: '%DIA Argentina',    fn: () => fetchDIA(code) },
+    ];
+    for (const step of fallbacks) {
+      setResult(`<div class="api-box api-load"><div class="api-title"><span class="spin"></span> Consultando ${step.label}…</div></div>`);
+      try { found = await step.fn(); } catch(e) { console.warn(step.label, e); }
+      if (found && found.name) break;
+    }
   }
 
   if (found && found.name) {
@@ -908,7 +1037,6 @@ async function doLookup(code) {
       ? `<img src="${found.image}" class="preview-img" onerror="this.outerHTML='<div class=preview-icon>🛒</div>'">`
       : `<div class="preview-icon">🛒</div>`;
 
-    // Precio: DIA lo trae directamente
     const priceInfo = found.price > 0
       ? `<div style="margin-top:6px;font-size:var(--fs-sm)">
            <b style="color:var(--green);font-size:var(--fs-lg)">${fmtARS(found.price)}</b>
@@ -919,6 +1047,11 @@ async function doLookup(code) {
                 </span>` : ''}
          </div>` : '';
 
+    // Pill de fuente: mostrar ambas si se fusionaron go-upc + DIA
+    const srcBadge = (diaData && found.price > 0 && found.src === 'goupc')
+      ? `${srcPillHTML('goupc')} + ${srcPillHTML('dia')}`
+      : srcPillHTML(found.src);
+
     const payload = JSON.stringify({
       name:found.name, brand:found.brand, barcode:code,
       unit, cat, src:found.src, image:found.image||'',
@@ -926,7 +1059,7 @@ async function doLookup(code) {
     }).replace(/"/g,'&quot;');
 
     setResult(`<div class="api-box api-ok">
-      <div class="api-title">✓ Encontrado ${srcPillHTML(found.src)}</div>
+      <div class="api-title">✓ Encontrado ${srcBadge}</div>
       <div class="product-preview" style="margin-top:10px" onclick='openFromAPI(${payload})'>
         ${imgH}
         <div style="flex:1;min-width:0">
@@ -939,57 +1072,127 @@ async function doLookup(code) {
   } else {
     const safeCode = code.replace(/'/g,'');
     setResult(`<div class="api-box api-miss"><div class="api-title">Código no encontrado</div>
-      <div class="api-sub">No encontrado en %DIA, go-upc, Open Food Facts ni Precios Claros AR.</div>
+      <div class="api-sub">No encontrado en go-upc, %DIA, Open Food Facts ni Precios Claros AR.</div>
       <button class="btn btn-green" style="margin-top:0" onclick="openAdd('${safeCode}')">Agregar manualmente</button></div>`);
   }
 }
 function onCodeInput(v) { document.getElementById('lookup-btn').disabled = !v || v.length < 6; }
 
 // ── Modal ─────────────────────────────────────
-function openAdd(barcode='') {
-  document.getElementById('f-name').value='';document.getElementById('f-brand').value='';
-  document.getElementById('f-bar').value=barcode;document.getElementById('f-qty').value='1';
-  document.getElementById('f-min').value='1';document.getElementById('f-exp').value='';
-  document.getElementById('f-unit').value='unid';document.getElementById('f-cat').value='Almacén';
-  document.getElementById('api-from').style.display='none';
-  const priceField = document.getElementById('f-price');
-  if (priceField) priceField.value = '';
-  pendingSource='manual';
-  window._pendingImage = '';
-  window._pendingPrice = 0;
-  document.getElementById('overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('f-name').focus(),300);
+let _editingId = null; // null = nuevo producto, número = editar existente
+
+function _fillModal({ name='', brand='', barcode='', qty=1, min=1, unit='unid',
+  cat='Almacén', exp='', image='', price=0, src='manual' } = {}) {
+  document.getElementById('f-name').value  = name;
+  document.getElementById('f-brand').value = brand;
+  document.getElementById('f-bar').value   = barcode;
+  document.getElementById('f-qty').value   = qty;
+  document.getElementById('f-min').value   = min;
+  document.getElementById('f-exp').value   = exp;
+  document.getElementById('f-image').value = image;
+  document.getElementById('f-price').value = price > 0 ? price : '';
+  const uSel = document.getElementById('f-unit');
+  [...uSel.options].forEach(o => { o.selected = o.value === unit; });
+  const cSel = document.getElementById('f-cat');
+  [...cSel.options].forEach(o => { o.selected = o.value === cat; });
+  previewModalImage(image);
+  pendingSource = src;
+  window._pendingImage = image;
+  window._pendingPrice = price;
 }
+
+function previewModalImage(url) {
+  const wrap = document.getElementById('modal-img-wrap');
+  if (!url || !url.startsWith('http')) {
+    const emoji = {Lácteos:'🥛',Carnes:'🥩',Verduras:'🥦',Frutas:'🍎',
+      Bebidas:'🧃',Limpieza:'🧹',Higiene:'🧴',Almacén:'🛒'}[
+      document.getElementById('f-cat')?.value] || '🛒';
+    wrap.innerHTML = `<div class="modal-img-placeholder">${emoji}</div>`;
+    return;
+  }
+  wrap.innerHTML = `<img class="modal-img-preview" src="${url}"
+    onerror="previewModalImage('')"
+    onload="this.style.display='block'"
+    alt="Preview">`;
+}
+
+function openAdd(barcode = '') {
+  _editingId = null;
+  document.getElementById('modal-title').textContent = 'Agregar producto';
+  document.getElementById('api-from').style.display = 'none';
+  _fillModal({ barcode });
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('f-name').focus(), 300);
+}
+
+function openEdit(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  _editingId = id;
+  document.getElementById('modal-title').textContent = 'Editar producto';
+  const af = document.getElementById('api-from');
+  af.style.display = p.src && p.src !== 'manual' ? 'block' : 'none';
+  if (p.src && p.src !== 'manual') af.textContent = `Fuente original: ${srcLabel(p.src)}`;
+  _fillModal(p);
+  document.getElementById('overlay').classList.add('open');
+  setTimeout(() => document.getElementById('f-name').focus(), 300);
+}
+
 function openFromAPI(data) {
-  document.getElementById('f-name').value=data.name||'';document.getElementById('f-brand').value=data.brand||'';
-  document.getElementById('f-bar').value=data.barcode||'';document.getElementById('f-qty').value='1';
-  document.getElementById('f-min').value='1';document.getElementById('f-exp').value='';
-  [...document.getElementById('f-unit').options].forEach(o=>{if(o.value===data.unit)o.selected=true;});
-  [...document.getElementById('f-cat').options].forEach(o=>{if(o.value===data.cat)o.selected=true;});
-  const af=document.getElementById('api-from');
-  af.style.display='block';
+  _editingId = null;
+  document.getElementById('modal-title').textContent = 'Agregar producto';
+  const af = document.getElementById('api-from');
+  af.style.display = 'block';
   const priceStr = data.price > 0 ? ` · Precio: ${fmtARS(data.price)}` : '';
-  af.textContent=`Datos de ${srcLabel(data.src)}${priceStr} — revisá y completá`;
-  // Mostrar precio en campo del modal si existe
-  const priceField = document.getElementById('f-price');
-  if (priceField) priceField.value = data.price > 0 ? data.price : '';
-  pendingSource=data.src;
-  window._pendingImage = data.image || '';
-  window._pendingPrice = data.price || 0;
+  af.textContent = `Datos de ${srcLabel(data.src)}${priceStr} — revisá y completá`;
+  _fillModal({
+    name: data.name||'', brand: data.brand||'', barcode: data.barcode||'',
+    unit: data.unit||'unid', cat: data.cat||'Almacén',
+    src: data.src, image: data.image||'', price: data.price||0
+  });
   document.getElementById('overlay').classList.add('open');
 }
-function closeModal() { document.getElementById('overlay').classList.remove('open'); }
-function bgClose(e) { if (e.target===document.getElementById('overlay')) closeModal(); }
-function saveProduct() {
-  const name=document.getElementById('f-name').value.trim();
-  if (!name) { alert('El nombre es obligatorio'); return; }
-  const p={id:Date.now(),name,brand:document.getElementById('f-brand').value.trim(),barcode:document.getElementById('f-bar').value.trim(),
-    qty:parseInt(document.getElementById('f-qty').value)||0,min:parseInt(document.getElementById('f-min').value)||1,
-    unit:document.getElementById('f-unit').value,cat:document.getElementById('f-cat').value,
-    exp:document.getElementById('f-exp').value,src:pendingSource,
-    image:window._pendingImage||'',
-    price:parseFloat(document.getElementById('f-price')?.value)||window._pendingPrice||0};
-  products.push(p);save();renderStock();renderStats();renderShop();closeModal();goPage('stock');toast(`✓ ${p.name} guardado`);
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  _editingId = null;
+}
+function bgClose(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
+
+function saveOrUpdateProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { alert('El nombre del producto es obligatorio'); return; }
+  const imageVal = document.getElementById('f-image').value.trim();
+  const data = {
+    name,
+    brand:   document.getElementById('f-brand').value.trim(),
+    barcode: document.getElementById('f-bar').value.trim(),
+    qty:     parseFloat(document.getElementById('f-qty').value) || 0,
+    min:     parseFloat(document.getElementById('f-min').value) || 1,
+    unit:    document.getElementById('f-unit').value,
+    cat:     document.getElementById('f-cat').value,
+    exp:     document.getElementById('f-exp').value,
+    src:     pendingSource,
+    image:   imageVal || window._pendingImage || '',
+    price:   parseFloat(document.getElementById('f-price').value) || window._pendingPrice || 0,
+  };
+
+  if (_editingId !== null) {
+    // Modo edición: actualizar producto existente
+    const idx = products.findIndex(p => p.id === _editingId);
+    if (idx !== -1) {
+      products[idx] = { ...products[idx], ...data };
+      toast(`✓ ${name} actualizado`);
+    }
+  } else {
+    // Modo nuevo: agregar
+    products.push({ id: Date.now(), ...data });
+    toast(`✓ ${name} guardado`);
+  }
+
+  save(); renderStock(); renderStats(); renderShop();
+  closeModal();
+  if (_editingId === null) goPage('stock');
 }
 
 // ── Lista de compras ──────────────────────────
@@ -1169,7 +1372,7 @@ async function enrichItemsFromGoUPC() {
     <div class="enrich-bar" id="enrich-bar">
       <div class="enrich-bar-title">
         <span class="spin" style="border-color:var(--green);border-top-color:transparent"></span>
-        Consultando %DIA y go-upc.com para imágenes, precios y datos…
+        Consultando go-upc.com (datos) + %DIA (precio) simultáneamente…
       </div>
       <div class="enrich-progress"><div class="enrich-fill" id="enrich-fill" style="width:0%"></div></div>
       <div class="enrich-detail" id="enrich-detail">Iniciando…</div>
@@ -1180,23 +1383,26 @@ async function enrichItemsFromGoUPC() {
     const batch = toEnrich.slice(i, i + CONCURRENCY);
     await Promise.all(batch.map(async item => {
       try {
-        // Intentar DIA primero (tiene precio real)
-        let data = null;
-        try { data = await fetchDIA(item.ean); } catch(e) {}
+        let goupcData = null, diaData = null;
 
-        // Si DIA no encontró, probar go-upc
-        if (!data || !data.name) {
-          try { data = await fetchGoUPC(item.ean); } catch(e) {}
-        }
+        // go-upc primero — mejor cobertura de EAN argentinos + imagen confiable
+        try { goupcData = await fetchGoUPC(item.ean); } catch(e) {}
 
-        if (data) {
-          // Solo sobreescribir nombre si el actual es muy corto o genérico
-          if (data.name && item.nombre.length < 8) item.nombre = data.name;
-          if (data.brand && !item.marca) item.marca = data.brand;
-          if (data.image && !item.image) item.image = data.image;
-          if (data.cat_raw && item.categoria === 'Almacén') item.categoria = guessCat(data.cat_raw);
-          // Precio: si el ticket no tenía precio o el de DIA es más reciente
-          if (data.price > 0 && item.precio === 0) item.precio = data.price;
+        // DIA en paralelo (o como fallback) — para precio real actualizado
+        try { diaData = await fetchDIA(item.ean); } catch(e) {}
+
+        // Fusión: go-upc aporta nombre/imagen/marca, DIA aporta precio
+        const best = goupcData?.name ? goupcData : diaData;
+        if (best) {
+          if (best.name  && item.nombre.length < 8) item.nombre   = best.name;
+          if (best.brand && !item.marca)            item.marca    = best.brand;
+          // Imagen: preferir vtexassets de DIA si existe, si no go-upc S3
+          if (diaData?.image?.includes('vtexassets')) item.image  = diaData.image;
+          else if (goupcData?.image)                  item.image  = goupcData.image;
+          if (best.cat_raw && item.categoria === 'Almacén') item.categoria = guessCat(best.cat_raw);
+          // Precio: DIA tiene el precio real argentino actualizado
+          if (diaData?.price > 0 && item.precio === 0)  item.precio = diaData.price;
+          else if (item.precio === 0 && best.price > 0) item.precio = best.price;
         }
         item.enriched = true;
       } catch(e) {
@@ -1412,31 +1618,115 @@ function importItems() {
   toast(`✓ Importado: ${msg}`);
 }
 
-// ── Exportar CSV ──────────────────────────────
+// ── Exportar / Importar JSON ──────────────────
+function exportStockJSON() {
+  const payload = {
+    version: 1,
+    exported: new Date().toISOString(),
+    products: products.map(p => ({
+      id:      p.id,
+      name:    p.name,
+      brand:   p.brand   || '',
+      barcode: p.barcode || '',
+      qty:     p.qty,
+      min:     p.min,
+      unit:    p.unit,
+      cat:     p.cat,
+      exp:     p.exp     || '',
+      src:     p.src     || 'manual',
+      image:   p.image   || '',
+      price:   p.price   || 0,
+      checked: p.checked || false,
+    }))
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `despensa-stock-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  toast(`✓ Exportado ${products.length} productos`);
+}
+
+function importStockJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      // Aceptar array directo o objeto con .products
+      const list = Array.isArray(data) ? data : (data.products || []);
+      if (!list.length) { toast('El archivo no contiene productos'); return; }
+
+      // Preguntar modo de importación
+      const mode = confirm(
+        `Se encontraron ${list.length} productos.\n\n` +
+        `• OK = Fusionar (actualiza existentes, agrega nuevos)\n` +
+        `• Cancelar = Reemplazar todo el stock`
+      ) ? 'merge' : 'replace';
+
+      if (mode === 'replace') {
+        products = list.map(p => normalizeProduct(p));
+      } else {
+        // Merge: buscar por id o barcode, actualizar o agregar
+        list.forEach(raw => {
+          const p = normalizeProduct(raw);
+          const existing = products.find(x =>
+            (p.id && x.id === p.id) ||
+            (p.barcode && x.barcode === p.barcode) ||
+            x.name.toLowerCase() === p.name.toLowerCase()
+          );
+          if (existing) {
+            Object.assign(existing, p, { id: existing.id }); // conservar id local
+          } else {
+            products.push({ ...p, id: Date.now() + Math.random() });
+          }
+        });
+      }
+
+      save(); renderStock(); renderStats(); renderShop();
+      toast(`✓ Importados ${list.length} productos (${mode === 'replace' ? 'reemplazado' : 'fusionado'})`);
+    } catch(err) {
+      alert('Error al leer el archivo JSON: ' + err.message);
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function normalizeProduct(raw) {
+  return {
+    id:      raw.id      || Date.now() + Math.random(),
+    name:    raw.name    || raw.nombre || '',
+    brand:   raw.brand   || raw.marca  || '',
+    barcode: raw.barcode || raw.ean    || '',
+    qty:     parseFloat(raw.qty || raw.cantidad || 0) || 0,
+    min:     parseFloat(raw.min || 1) || 1,
+    unit:    raw.unit    || raw.unidad || 'unid',
+    cat:     raw.cat     || raw.categoria || 'Almacén',
+    exp:     raw.exp     || '',
+    src:     raw.src     || 'manual',
+    image:   raw.image   || '',
+    price:   parseFloat(raw.price || raw.precio || 0) || 0,
+    checked: raw.checked || false,
+  };
+}
+
+// ── Exportar lista de compras CSV (mantener CSV para compatibilidad) ─
 function escCSV(v) {
   const s = String(v ?? '');
   return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s.replace(/"/g,'""')}"` : s;
 }
 function downloadCSV(filename, rows) {
   const csv = rows.map(r => r.map(escCSV).join(',')).join('\r\n');
-  const blob = new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8'});
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = filename;
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   toast(`✓ Descargando ${filename}`);
-}
-
-function exportStockCSV() {
-  const header = ['Nombre','Marca','Categoría','Cantidad','Unidad','Mínimo','Precio unitario ARS','Vencimiento','Código barras','Fuente','Estado'];
-  const rows = [header, ...products.map(p => [
-    p.name, p.brand||'', p.cat, p.qty, p.unit, p.min,
-    p.price||'', p.exp||'', p.barcode||'', p.src,
-    statusOf(p) === 'ok' ? 'OK' : statusOf(p) === 'low' ? 'Stock bajo' : 'Sin stock'
-  ])];
-  const date = new Date().toISOString().slice(0,10);
-  downloadCSV(`despensa-stock-${date}.csv`, rows);
 }
 
 function exportShopCSV() {
