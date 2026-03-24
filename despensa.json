@@ -1,39 +1,9 @@
 {
   "version": 1,
-  "saved": "2026-03-24T15:16:39.734Z",
+  "exported": "2026-03-24T15:34:49.735Z",
   "products": [
     {
-      "id": 1774109536675,
-      "name": "Tregar Leche Descremada",
-      "brand": "leche descremada tregar",
-      "barcode": "7793913012996",
-      "qty": 0,
-      "min": 1,
-      "unit": "l",
-      "cat": "Bebidas",
-      "exp": "",
-      "src": "openfoodfacts",
-      "image": "https://images.openfoodfacts.org/images/products/779/391/301/2996/front_es.24.200.jpg",
-      "price": 0,
-      "checked": false
-    },
-    {
-      "id": 1774109757470,
-      "name": "Colonial Ivess Soda Sifon",
-      "brand": "Colonial",
-      "barcode": "7798060140059",
-      "qty": 1,
-      "min": 1,
-      "unit": "unid",
-      "cat": "Bebidas",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/38175729.png",
-      "price": 0,
-      "checked": false
-    },
-    {
-      "id": 1774109951893.7524,
+      "id": 1774122359835.2917,
       "name": "GALLETITAS PALITOS ALMENDRA TRIMAK BOLSA",
       "brand": "Trimak",
       "barcode": "7798024290318",
@@ -48,52 +18,7 @@
       "checked": false
     },
     {
-      "id": 1774109951899.7766,
-      "name": "Pizzitos Bulnez 120 G",
-      "brand": "",
-      "barcode": "7791720038031",
-      "qty": 1,
-      "min": 1,
-      "unit": "g",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/370817739.jpeg",
-      "price": 0,
-      "checked": false
-    },
-    {
-      "id": 1774109951899.7944,
-      "name": "Cadea Gelatina Royal Sabor Frutos Rojos 25 G",
-      "brand": "Cadea",
-      "barcode": "7622201820565",
-      "qty": 1,
-      "min": 1,
-      "unit": "g",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/166466155.jpeg",
-      "price": 1330,
-      "checked": false
-    },
-    {
-      "id": 1774109951899.402,
-      "name": "Star Company Organizador Plástico Para Calzados Set 3 U",
-      "brand": "Star Company",
-      "barcode": "7791231103174",
-      "qty": 3,
-      "min": 1,
-      "unit": "unid",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/166698159.jpeg",
-      "price": 11599,
-      "checked": false
-    },
-    {
-      "id": 1774109951899.715,
+      "id": 1774122359835.9395,
       "name": "PROTECTOR DIARIO ANATOMICO S D DONCELLA",
       "brand": "Doncella",
       "barcode": "7790940233240",
@@ -108,7 +33,7 @@
       "checked": false
     },
     {
-      "id": 1774109951899.7812,
+      "id": 1774122359835.4744,
       "name": "MINI OBLEAS CHOCO Y AVE CARREFOUR CLASSI",
       "brand": "",
       "barcode": "7791720043738",
@@ -123,7 +48,7 @@
       "checked": false
     },
     {
-      "id": 1774109951899.1604,
+      "id": 1774122359835.2295,
       "name": "ACEITUNAS VERDES DESCAROZADAS NUCETE DP",
       "brand": "Nucete",
       "barcode": "7792070071693",
@@ -138,7 +63,7 @@
       "checked": false
     },
     {
-      "id": 1774109951899.1653,
+      "id": 1774122359835.6074,
       "name": "HARINA DE TRIGO 000 BULNEZ X 1 KG",
       "brand": "Bulnez",
       "barcode": "7791720036686",
@@ -153,13 +78,13 @@
       "checked": false
     },
     {
-      "id": 1774109951900.633,
+      "id": 1774122359835.0002,
       "name": "SODA CARREFOUR CLASSIC SIFON X 2 LT",
       "brand": "Carrefour",
       "barcode": "7791720029947",
       "qty": 2,
       "min": 1,
-      "unit": "l",
+      "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
       "src": "factura",
@@ -168,7 +93,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.1946,
+      "id": 1774122359835.4707,
       "name": "ARROZ LARGO FINO 00000 CARREFOUR BOLSA X",
       "brand": "Carrefour",
       "barcode": "7791720033074",
@@ -183,13 +108,13 @@
       "checked": false
     },
     {
-      "id": 1774109951900.6226,
+      "id": 1774122359835.5254,
       "name": "PURE DE PAPAS CARREFOUR BOLSA X 100 GRS",
       "brand": "Carrefour",
       "barcode": "7791720016152",
       "qty": 6,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Verduras",
       "exp": "",
       "src": "factura",
@@ -198,7 +123,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.8567,
+      "id": 1774122359835.8342,
       "name": "QUESO GOUDA TREMBLAY TROZADO X KG",
       "brand": "Tremblay",
       "barcode": "2509084000008",
@@ -213,7 +138,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.1414,
+      "id": 1774122359835.9565,
       "name": "MOUSSE CHOCOLATE EXQUISITA SOBRE X 95 GR",
       "brand": "Exquisita",
       "barcode": "7790070432346",
@@ -228,7 +153,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.6821,
+      "id": 1774122359835.3457,
       "name": "LECHE UAT PARC DESC CARREFOUR CLASSIC BR",
       "brand": "Carrefour",
       "barcode": "7791720029411",
@@ -243,7 +168,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.261,
+      "id": 1774122359835.7388,
       "name": "HARINA DE TRIGO TIPO 0000 TASSARA X 1 KG",
       "brand": "Barlovento",
       "barcode": "7792612000716",
@@ -258,7 +183,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.7979,
+      "id": 1774122359835.284,
       "name": "PROTECTOR ESENCIAL ADULTO PLENITUD FEMME",
       "brand": "Plenitud",
       "barcode": "7794626011498",
@@ -273,7 +198,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.1887,
+      "id": 1774122359835.603,
       "name": "CREMA LS UAT TETRA SLIM 200CC",
       "brand": "La Serenísima",
       "barcode": "7790742141309",
@@ -288,7 +213,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.5708,
+      "id": 1774122359835.4395,
       "name": "HARINA DE TRIGO 0000 BULNEZ X 1 KG",
       "brand": "Bulnes",
       "barcode": "7791720036679",
@@ -303,7 +228,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.5051,
+      "id": 1774122359835.1335,
       "name": "QUESO SARDO TREMBLAY TROZADO X KG",
       "brand": "",
       "barcode": "2509088000004",
@@ -318,7 +243,7 @@
       "checked": false
     },
     {
-      "id": 1774109951900.2073,
+      "id": 1774122359835.303,
       "name": "LEVADURA SECA INSTANTANEA LEVEX SOBRE X",
       "brand": "Levex",
       "barcode": "7798018850184",
@@ -333,13 +258,13 @@
       "checked": false
     },
     {
-      "id": 1774109951901.7134,
+      "id": 1774122359835.6782,
       "name": "TOMATE TRITURADO CARREFOUR DP X 970 GRS",
       "brand": "",
       "barcode": "7791720026540",
       "qty": 3,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Verduras",
       "exp": "2029-02-21",
       "src": "factura",
@@ -348,7 +273,7 @@
       "checked": false
     },
     {
-      "id": 1774109951901.9749,
+      "id": 1774122359835.228,
       "name": "MAYONESA LIVIANA HELLMANNS DOY PACK X 47",
       "brand": "Hellmann's",
       "barcode": "7794000007109",
@@ -363,52 +288,7 @@
       "checked": false
     },
     {
-      "id": 1774112287553,
-      "name": "Cunnington Gaseosa Indian Tonic Classic X2,25lts",
-      "brand": "Cunnington",
-      "barcode": "7790639003444",
-      "qty": 3,
-      "min": 1,
-      "unit": "unid",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/166738933.jpeg",
-      "price": 1650,
-      "checked": false
-    },
-    {
-      "id": 1774112500524,
-      "name": "Remington Rollo De Cocina 50 Paños 3 Ud",
-      "brand": "Remington",
-      "barcode": "8480017091123",
-      "qty": 0,
-      "min": 1,
-      "unit": "unid",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/192629126.jpeg",
-      "price": 0,
-      "checked": false
-    },
-    {
-      "id": 1774113159196,
-      "name": "Nobleza Gaucha Yerba Mate Suave Sin TACC, 1 Kg",
-      "brand": "Nobleza Gaucha",
-      "barcode": "7790070509116",
-      "qty": 1,
-      "min": 1,
-      "unit": "unid",
-      "cat": "Almacén",
-      "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/83045853.png",
-      "price": 0,
-      "checked": false
-    },
-    {
-      "id": 1774124943049.7644,
+      "id": 1774122359835.0383,
       "name": "Pureza Premezcla Para Pizza Integral Gourmet 550 G",
       "brand": "Pureza",
       "barcode": "7792180005120",
@@ -423,7 +303,7 @@
       "checked": false
     },
     {
-      "id": 1774124943049.477,
+      "id": 1774122359835.1938,
       "name": "Chorizo Chistorra",
       "brand": "",
       "barcode": "7798260740530",
@@ -438,7 +318,7 @@
       "checked": false
     },
     {
-      "id": 1774124943050.7014,
+      "id": 1774122359835.574,
       "name": "Aceite de girasol 900 ml",
       "brand": "Legitimo",
       "barcode": "7798316700808",
@@ -453,7 +333,22 @@
       "checked": false
     },
     {
-      "id": 1774124943050.636,
+      "id": 1774122359835.1826,
+      "name": "Nobleza Gaucha Yerba Mate Suave Sin TACC, 1 Kg",
+      "brand": "Nobleza Gaucha",
+      "barcode": "7790070509116",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/83045853.png",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774122359835.415,
       "name": "Cat Chow Alimento Gatos Adulto Pescado Y Pollo 1 Kg",
       "brand": "Cat Chow",
       "barcode": "8445290057433",
@@ -468,7 +363,7 @@
       "checked": false
     },
     {
-      "id": 1774124943050.375,
+      "id": 1774122359835.33,
       "name": "Bulnez Papas Fritas Sabor Original En Tubo 100 Grs",
       "brand": "Bulnez",
       "barcode": "7791720038871",
@@ -483,7 +378,7 @@
       "checked": false
     },
     {
-      "id": 1774124943050.6106,
+      "id": 1774122359835.0894,
       "name": "Hamburguesa Parrillera Dia 240 Gr",
       "brand": "",
       "barcode": "8480017217400",
@@ -498,7 +393,7 @@
       "checked": false
     },
     {
-      "id": 1774124943050.5347,
+      "id": 1774122359835.4285,
       "name": "Papel Higiénico DIA Simple Hoja 4 Rollos 80 Mts",
       "brand": "",
       "barcode": "8480017154255",
@@ -513,7 +408,127 @@
       "checked": false
     },
     {
-      "id": 1774126565848,
+      "id": 1774122359835.8135,
+      "name": "Pizzitos Bulnez 120 G",
+      "brand": "",
+      "barcode": "7791720038031",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/370817739.jpeg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774122359835.878,
+      "name": "Cadea Gelatina Royal Sabor Frutos Rojos 25 G",
+      "brand": "Cadea",
+      "barcode": "7622201820565",
+      "qty": 1,
+      "min": 1,
+      "unit": "g",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/166466155.jpeg",
+      "price": 1330,
+      "checked": false
+    },
+    {
+      "id": 1774122359835.6506,
+      "name": "Star Company Organizador Plástico Para Calzados Set 3 U",
+      "brand": "Star Company",
+      "barcode": "7791231103174",
+      "qty": 3,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/166698159.jpeg",
+      "price": 11599,
+      "checked": false
+    },
+    {
+      "id": 1774123011103,
+      "name": "Carpano Vermouth Rosso 950 Ml",
+      "brand": "Carpano Vital",
+      "barcode": "7790290008192",
+      "qty": 1,
+      "min": 1,
+      "unit": "ml",
+      "cat": "Bebidas",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/118359415.png",
+      "price": 5399,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.0928,
+      "name": "Tregar Leche Descremada",
+      "brand": "leche descremada tregar",
+      "barcode": "7793913012996",
+      "qty": 0,
+      "min": 1,
+      "unit": "l",
+      "cat": "Bebidas",
+      "exp": "",
+      "src": "openfoodfacts",
+      "image": "https://images.openfoodfacts.org/images/products/779/391/301/2996/front_es.24.200.jpg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.951,
+      "name": "Colonial Ivess Soda Sifon",
+      "brand": "Colonial",
+      "barcode": "7798060140059",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Bebidas",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/38175729.png",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.0974,
+      "name": "Cunnington Gaseosa Indian Tonic Classic X2,25lts",
+      "brand": "Cunnington",
+      "barcode": "7790639003444",
+      "qty": 3,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/166738933.jpeg",
+      "price": 1650,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.1033,
+      "name": "Remington Rollo De Cocina 50 Paños 3 Ud",
+      "brand": "Remington",
+      "barcode": "8480017091123",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/192629126.jpeg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.5735,
       "name": "Papel Higiénico Simple Hoja 80mts 2 Ud",
       "brand": "Dua",
       "barcode": "8480017094384",
@@ -528,7 +543,7 @@
       "checked": false
     },
     {
-      "id": 1774127386960,
+      "id": 1774135877752.882,
       "name": "Morixe Harina De Trigo 000 1 Kg",
       "brand": "Morixe",
       "barcode": "7790199000013",
@@ -543,7 +558,7 @@
       "checked": false
     },
     {
-      "id": 1774129002840,
+      "id": 1774135877752.2026,
       "name": "Premezcla Para Ñoquis Papa Classic 400 Grs",
       "brand": "",
       "barcode": "7791720040621",
@@ -558,7 +573,7 @@
       "checked": false
     },
     {
-      "id": 1774132850212,
+      "id": 1774135877752.6357,
       "name": "Pureza Harina Para Pan Casero Con Levadura 1 Kg",
       "brand": "Pureza",
       "barcode": "7792180004901",
@@ -573,13 +588,13 @@
       "checked": false
     },
     {
-      "id": 1774133055000,
+      "id": 1774135877752.4985,
       "name": "Seven Up Gaseosa Sin Azúcar 1.5 L",
       "brand": "Seven Up",
       "barcode": "7791813434412",
       "qty": 1,
       "min": 1,
-      "unit": "l",
+      "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
       "src": "goupc",
@@ -588,7 +603,7 @@
       "checked": false
     },
     {
-      "id": 1774133521153,
+      "id": 1774135877752.187,
       "name": "Matambre Casero x kg",
       "brand": "Coto",
       "barcode": "2000806000004",
@@ -603,7 +618,7 @@
       "checked": false
     },
     {
-      "id": 1774133870173,
+      "id": 1774135877752.5833,
       "name": "Matarazzo Fideos Tirabuzón 500gr",
       "brand": "Matarazzo",
       "barcode": "7790070336293",
@@ -618,7 +633,7 @@
       "checked": false
     },
     {
-      "id": 1774133991287,
+      "id": 1774135877752.8765,
       "name": "Puré De Tomate Dia 520 Gr",
       "brand": "",
       "barcode": "8480017299314",
@@ -633,7 +648,7 @@
       "checked": false
     },
     {
-      "id": 1774134190537,
+      "id": 1774135877752.1372,
       "name": "Almidón De Maíz DIA 500 Gr",
       "brand": "",
       "barcode": "8480017229700",
@@ -648,13 +663,13 @@
       "checked": false
     },
     {
-      "id": 1774134328257,
+      "id": 1774135877752.3616,
       "name": "dia Polvo Para Hornear 50 Gr",
       "brand": "dia",
       "barcode": "8480017252661",
       "qty": 2,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Almacén",
       "exp": "2028-01-01",
       "src": "goupc",
@@ -663,7 +678,7 @@
       "checked": false
     },
     {
-      "id": 1774134390418,
+      "id": 1774135877752.8154,
       "name": "Proelec Azúcar Plus DIA Común Tipo A 1 Kg",
       "brand": "Proelec",
       "barcode": "8480017298515",
@@ -678,13 +693,28 @@
       "checked": false
     },
     {
-      "id": 1774134511636,
+      "id": 1774135877752.3496,
+      "name": "Cafe Morenita Torrado Molido Intenso En Saquitos",
+      "brand": "",
+      "barcode": "7790170903920",
+      "qty": 7,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774135877752.0825,
       "name": "Arlistan Café Suave Mas Aroma 50 Gr",
       "brand": "Arlistan",
       "barcode": "7790070933652",
       "qty": 1,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Almacén",
       "exp": "",
       "src": "goupc",
@@ -693,7 +723,7 @@
       "checked": false
     },
     {
-      "id": 1774134791245,
+      "id": 1774135877752.4602,
       "name": "Granix Sin Sal 200 Gr.",
       "brand": "Granix",
       "barcode": "7790045827733",
@@ -708,7 +738,7 @@
       "checked": false
     },
     {
-      "id": 1774134907790,
+      "id": 1774135877752.606,
       "name": "Harina De Trigo 000 DIA 1 Kg",
       "brand": "",
       "barcode": "8480017242723",
@@ -723,7 +753,7 @@
       "checked": false
     },
     {
-      "id": 1774134999105,
+      "id": 1774135877753.45,
       "name": "Oreo Galletitas Mini 150g",
       "brand": "Oreo",
       "barcode": "7622202219337",
@@ -738,7 +768,7 @@
       "checked": false
     },
     {
-      "id": 1774135110616,
+      "id": 1774135877753.4414,
       "name": "Oreo Galletitas Dulces Rellenas Con Crema 118 G",
       "brand": "Oreo",
       "barcode": "7622201735296",
@@ -753,7 +783,7 @@
       "checked": false
     },
     {
-      "id": 1774135337606,
+      "id": 1774135877753.6514,
       "name": "Chocolinas Galletitas De Chocolate, 250 G",
       "brand": "Chocolinas",
       "barcode": "7790040143234",
@@ -768,7 +798,7 @@
       "checked": false
     },
     {
-      "id": 1774135393361,
+      "id": 1774135877753.4402,
       "name": "Chocolinas Galletitas De Chocolate Blanco 245g",
       "brand": "Chocolinas",
       "barcode": "7790040142985",
@@ -783,7 +813,7 @@
       "checked": false
     },
     {
-      "id": 1774135448581,
+      "id": 1774135877753.183,
       "name": "Pozo Vainillas 85g",
       "brand": "Pozo",
       "barcode": "7790077000326",
@@ -798,17 +828,302 @@
       "checked": false
     },
     {
-      "id": 1774365388749,
-      "name": "La Morenita Cafe En Saquitos 20U",
-      "brand": "La Morenita",
-      "barcode": "7790170903937",
+      "id": 1774366477831.3696,
+      "name": "Chacabuco Harina Integral Con Semillas 750 G",
+      "brand": "Chacabuco",
+      "barcode": "7799037603003",
+      "qty": 0,
+      "min": 1,
+      "unit": "g",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/59201301.jpeg",
+      "price": 1825,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.0137,
+      "name": "Vick Vitapyrena Forte X 5 Sobres",
+      "brand": "Vick",
+      "barcode": "7500435221405",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/323779649.webp",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.7573,
+      "name": "Cuquets Arroz Integral 00000 1 Kg",
+      "brand": "Cuquets",
+      "barcode": "8480017281517",
+      "qty": 1,
+      "min": 1,
+      "unit": "kg",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/125370719.jpeg",
+      "price": 1400,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.7292,
+      "name": "Uvasal Naranja Sob.X 15 X 2",
+      "brand": "Uvasal",
+      "barcode": "7794640130700",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/93179004.jpeg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.4797,
+      "name": "Uvasal X 15 Sobres",
+      "brand": "Uvasal",
+      "barcode": "7794640131400",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Higiene",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/92885093.jpeg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.2158,
+      "name": "Genérico Queso Mozzarella Barraza Cilindro X Kg",
+      "brand": "Barraza",
+      "barcode": "7790309000063",
+      "qty": 0.5,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Lácteos",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/59146359.jpeg",
+      "price": 14500,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.7092,
+      "name": "Filete De Merluza Despinado Congelado X Kg",
+      "brand": "Coto",
+      "barcode": "2039688000000",
+      "qty": 1,
+      "min": 1,
+      "unit": "kg",
+      "cat": "Carnes",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/122963204.jpeg",
+      "price": 9119,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.4329,
+      "name": "Molto Arvejas Tetra 340gr",
+      "brand": "Molto",
+      "barcode": "7798138552838",
+      "qty": 1,
+      "min": 1,
+      "unit": "g",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/308020780.jpeg",
+      "price": 500,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.078,
+      "name": "Krachitos Papas Fritas Corte Americano 50 Grs",
+      "brand": "Krachitos",
+      "barcode": "7794520869324",
       "qty": 1,
       "min": 1,
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
       "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/38179646.png",
+      "image": "https://go-upc.s3.amazonaws.com/images/311112790.jpeg",
+      "price": 1300,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.7502,
+      "name": "La Salteña Ravioles Jamon Y Mozzarella 450g",
+      "brand": "La Salteña",
+      "barcode": "7790070621870",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/117528432.jpeg",
+      "price": 2849,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.3442,
+      "name": "Genérico Bondiola De Cerdo X Kg",
+      "brand": "Carrefour",
+      "barcode": "2506595000008",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/59187665.jpeg",
+      "price": 6990,
+      "checked": false
+    },
+    {
+      "id": 1774366477831.9563,
+      "name": "Queso Cremoso PUNTA DEL AGUA X Kg",
+      "brand": "Coto",
+      "barcode": "2000161000008",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://static.cotodigital3.com.ar/sitios/fotos/mini/00000100/00000161.jpg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.0535,
+      "name": "La Serenísima Dulce De Leche Repostero, 400 G",
+      "brand": "La Serenísima",
+      "barcode": "7790742067005",
+      "qty": 0,
+      "min": 1,
+      "unit": "g",
+      "cat": "Lácteos",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/125290545.jpeg",
+      "price": 2930,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.2664,
+      "name": "Onion Tortilla 500g Wholesaler",
+      "brand": "Española",
+      "barcode": "8420878598133",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/72735193.webp",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.497,
+      "name": "Día Lentejas Con Chorizo",
+      "brand": "Día España euros",
+      "barcode": "8480017279330",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/109689500.jpeg",
+      "price": 1,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.3784,
+      "name": "La Morenita Cafe En Saquitos 12 Ud",
+      "brand": "La Morenita",
+      "barcode": "7790170903005",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/323063477.jpeg",
+      "price": 3529,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.4504,
+      "name": "Hacendado Tortilla Fresca De Patata Con Cebolla - 600gr",
+      "brand": "Hacendado",
+      "barcode": "8480000807724",
+      "qty": 0,
+      "min": 1,
+      "unit": "g",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/40347257.jpg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.9805,
+      "name": "Cuarto Trasero Pollo Congelado X Kg",
+      "brand": "Carrefour",
+      "barcode": "2507599000001",
+      "qty": 0,
+      "min": 1,
+      "unit": "kg",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/59208344.jpeg",
+      "price": 4190,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.8652,
+      "name": "Vacalin Queso Cremoso 400gr",
+      "brand": "Vacalin",
+      "barcode": "7790616000442",
+      "qty": 0,
+      "min": 1,
+      "unit": "g",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/427673871.jpeg",
+      "price": 0,
+      "checked": false
+    },
+    {
+      "id": 1774366477832.647,
+      "name": "La Chinata Smoked Hot Paprika 70g",
+      "brand": "La Chinata",
+      "barcode": "8421401301206",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "goupc",
+      "image": "https://go-upc.s3.amazonaws.com/images/167468289.jpeg",
       "price": 0,
       "checked": false
     }
