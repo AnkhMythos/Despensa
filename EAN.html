@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Buscador EAN · Código de barras + Imagen de producto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+    <!-- Input para que el usuario escriba el EAN -->
+<input type="text" id="eanInput" placeholder="Ingresa 12-13 dígitos EAN" maxlength="13" pattern="\d*">
+<button onclick="generarBarcode()">Generar Código de Barras</button>
+
+<!-- Contenedor del barcode -->
+<div style='text-align: center; margin-top: 20px;'>
+  <img id="barcodeImg" 
+       alt='Barcode Generator TEC-IT'
+       src='' 
+       style='display: none;'/>
+</div>
+<div style='padding-top:8px; text-align:center; font-size:15px;'>
+  <a href='https://www.tec-it.com' title='Barcode Software by TEC-IT' target='_blank'>
+    TEC-IT Barcode Generator
+  </a>
+</div>
+
+<script>
+  function generarBarcode() {
+    // Obtener y limpiar el valor del input
+    let ean = document.getElementById('eanInput').value.trim();
+    
+    // Validar: solo números y longitud 12-13
+    if (!/^\d{12,13}$/.test(ean)) {
+      alert('Por favor ingresa un EAN válido (12 o 13 dígitos numéricos)');
+      return;
+    }
+    
+    // Construir URL con el EAN dinámico
+    const url = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(ean)}&code=EAN13`;
+    
+    // Actualizar la imagen
+    const img = document.getElementById('barcodeImg');
+    img.src = url;
+    img.style.display = 'inline-block';
+    img.alt = `Código de barras EAN-13: ${ean}`;
+  }
+  
+  // Generar automáticamente si ya hay una variable ean definida
+  // let ean = "656750817339"; // ← Descomenta y asigna tu valor aquí
+</script>
+</body>
+</html>

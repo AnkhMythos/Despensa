@@ -288,7 +288,7 @@ button,input,select{font-family:inherit}
 <body>
 
 <header class="header">
-  <div class="header-title">🥦 <span>Despensa V9.0</span></div>
+  <div class="header-title">🥦 Mi <span>Despensa</span></div>
   <div class="header-actions">
     <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
     <button class="add-btn" onclick="openAdd()">
@@ -315,16 +315,21 @@ button,input,select{font-family:inherit}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           Imágenes
         </button>
-        <button class="tool-btn" onclick="exportStockJSON()" title="Descargar stock como JSON">
+        <button class="tool-btn import-btn" onclick="connectFile()" title="Conectar despensa.json para lectura/escritura directa" id="connect-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><polyline points="9 15 12 18 15 15"/></svg>
+          Conectar archivo
+        </button>
+        <button class="tool-btn" onclick="exportStockJSON()" title="Descargar despensa.json">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Exportar JSON
         </button>
-        <label class="tool-btn import-btn" for="import-json-input" title="Cargar stock desde JSON">
+        <label class="tool-btn" for="import-json-input" title="Cargar stock desde JSON">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Importar JSON
         </label>
         <input type="file" id="import-json-input" accept=".json,application/json" style="display:none" onchange="importStockJSON(this)">
       </div>
+      <div id="sync-status" style="margin-bottom:10px;min-height:18px;padding:0 2px"></div>
       <div class="search-wrap">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="search" class="search-input" id="search-input" placeholder="Buscar producto..." oninput="renderStock()">
@@ -527,22 +532,171 @@ Ejemplo:
 <script>
 'use strict';
 
-// ── Datos ─────────────────────────────────────
-let products = JSON.parse(localStorage.getItem('despensa_v7') || '[]');
-let activeFilter = 'todos';
+// ════════════════════════════════════════════════════════════════
+// DATOS Y PERSISTENCIA
+// ════════════════════════════════════════════════════════════════
+
+let products      = [];
+let activeFilter  = 'todos';
 let pendingSource = 'manual';
 
-const DEMO = [
-  {id:1,name:'Arroz integral',brand:'Gallo',barcode:'7790895000123',qty:2,min:2,unit:'kg',cat:'Almacén',exp:'2025-12-01',src:'manual'},
-  {id:2,name:'Leche entera',brand:'La Serenísima',barcode:'7791337001234',qty:0,min:1,unit:'l',cat:'Lácteos',exp:'2026-04-10',src:'manual'},
-  {id:3,name:'Aceite girasol',brand:'Cocinero',barcode:'7793184002345',qty:3,min:1,unit:'unid',cat:'Almacén',exp:'2026-06-01',src:'manual'},
-  {id:4,name:'Fideos tallarín',brand:'Matarazzo',barcode:'7791234003456',qty:1,min:2,unit:'paq',cat:'Almacén',exp:'2026-08-01',src:'manual'},
-  {id:5,name:'Yerba mate',brand:'Taragüi',barcode:'7790315004567',qty:1,min:1,unit:'kg',cat:'Almacén',exp:'2026-03-15',src:'manual'},
-  {id:6,name:'Jabón líquido',brand:'Magistral',barcode:'7790056005678',qty:0,min:1,unit:'unid',cat:'Limpieza',exp:'',src:'manual'},
-];
-if (!products.length) { products = DEMO; save(); }
+// File System Access API handle — Chrome/Edge desktop
+// Cuando está activo, cada save() escribe directo al archivo del disco.
+let _fileHandle = null;
 
-function save() { localStorage.setItem('despensa_v7', JSON.stringify(products)); }
+// ── Construcción del payload JSON ─────────────
+function buildPayload() {
+  return {
+    version:  1,
+    saved:    new Date().toISOString(),
+    products: products.map(p => ({
+      id:      p.id,
+      name:    p.name,
+      brand:   p.brand   || '',
+      barcode: p.barcode || '',
+      qty:     p.qty,
+      min:     p.min,
+      unit:    p.unit,
+      cat:     p.cat,
+      exp:     p.exp     || '',
+      src:     p.src     || 'manual',
+      image:   p.image   || '',
+      price:   p.price   || 0,
+      checked: p.checked || false,
+    }))
+  };
+}
+
+// ── Guardar: File System API → localStorage ───
+async function save() {
+  const payload = buildPayload();
+
+  // 1. Si tenemos handle abierto, escribir directo al archivo
+  if (_fileHandle) {
+    try {
+      const writable = await _fileHandle.createWritable();
+      await writable.write(JSON.stringify(payload, null, 2));
+      await writable.close();
+      localStorage.setItem('despensa_v7', JSON.stringify(payload));
+      setSyncStatus('synced');
+      return;
+    } catch(e) {
+      console.warn('FSAW error, fallback a localStorage:', e);
+      _fileHandle = null;
+      setSyncStatus('disconnected');
+    }
+  }
+
+  // 2. Fallback: localStorage
+  localStorage.setItem('despensa_v7', JSON.stringify(payload));
+  setSyncStatus('local');
+}
+
+// ── Carga inicial ──────────────────────────────
+async function initData() {
+  // Mostrar spinner
+  document.getElementById('prod-list').innerHTML = `
+    <div class="empty" style="padding:44px 20px">
+      <div style="width:40px;height:40px;border:3px solid var(--border);
+        border-top-color:var(--green);border-radius:50%;
+        animation:sp .7s linear infinite;margin:0 auto 14px"></div>
+      <div style="color:var(--text3);font-size:var(--fs-sm)">Cargando despensa.json…</div>
+    </div>`;
+
+  // ── Intento 1: fetch ./despensa.json (servidor local o mismo directorio) ──
+  try {
+    const res = await fetch('./despensa.json', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : (data.products || []);
+      products = list.map(normalizeProduct);
+      setSyncStatus('fetch');
+      console.info(`✓ despensa.json cargado via fetch: ${products.length} productos`);
+      renderAll();
+      return;
+    }
+  } catch(e) {
+    console.info('fetch despensa.json no disponible:', e.message);
+  }
+
+  // ── Intento 2: localStorage ──────────────────
+  const stored = localStorage.getItem('despensa_v7');
+  if (stored) {
+    try {
+      const data = JSON.parse(stored);
+      const list = Array.isArray(data) ? data : (data.products || []);
+      products = list.map(normalizeProduct);
+      setSyncStatus('local');
+      console.info(`✓ localStorage cargado: ${products.length} productos`);
+      renderAll();
+      return;
+    } catch(e) {
+      console.warn('localStorage corrupto, ignorado');
+    }
+  }
+
+  // ── Primera vez: despensa vacía ──────────────
+  products = [];
+  setSyncStatus('empty');
+  renderAll();
+}
+
+// ── Indicador de sincronización ───────────────
+// Estados: 'synced' | 'fetch' | 'local' | 'disconnected' | 'empty'
+function setSyncStatus(state) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const cfg = {
+    synced:       { icon: '💾', text: 'Guardado en archivo', color: 'var(--green)' },
+    fetch:        { icon: '📂', text: 'despensa.json (solo lectura — conectá para escribir)', color: 'var(--blue)' },
+    local:        { icon: '🔒', text: 'Solo en este navegador', color: 'var(--amber)' },
+    disconnected: { icon: '⚠️', text: 'Archivo desconectado — cambios solo en navegador', color: 'var(--amber)' },
+    empty:        { icon: '🥦', text: 'Despensa vacía', color: 'var(--text3)' },
+  };
+  const c = cfg[state] || cfg.local;
+  el.innerHTML = `<span style="color:${c.color};font-size:var(--fs-xs);font-weight:600">${c.icon} ${c.text}</span>`;
+  el.dataset.state = state;
+}
+
+// ── Conectar/abrir despensa.json via File System Access API ───
+// Solo disponible en Chrome/Edge desktop.
+// Abre un picker, carga el archivo Y mantiene el handle para escritura futura.
+async function connectFile() {
+  if (!window.showOpenFilePicker) {
+    // Fallback: importar como carga de datos solamente
+    document.getElementById('import-json-input').click();
+    return;
+  }
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: 'JSON despensa', accept: { 'application/json': ['.json'] } }],
+      multiple: false,
+      id: 'despensa-file',
+      startIn: 'documents',
+    });
+    const file = await handle.getFile();
+    const text = await file.text();
+    const data = JSON.parse(text);
+    const list = Array.isArray(data) ? data : (data.products || []);
+    products = list.map(normalizeProduct);
+    _fileHandle = handle;
+    // Guardar inmediatamente para verificar permisos de escritura
+    await save();
+    renderAll();
+    toast(`✓ Conectado a ${file.name} · ${products.length} productos`);
+  } catch(e) {
+    if (e.name !== 'AbortError') {
+      toast('No se pudo abrir el archivo');
+      console.warn(e);
+    }
+  }
+}
+
+function renderAll() {
+  renderStats();
+  renderStock();
+  renderShop();
+}
 
 // ── Tema ──────────────────────────────────────
 (function initTheme() {
@@ -1620,31 +1774,40 @@ function importItems() {
 
 // ── Exportar / Importar JSON ──────────────────
 function exportStockJSON() {
-  const payload = {
-    version: 1,
-    exported: new Date().toISOString(),
-    products: products.map(p => ({
-      id:      p.id,
-      name:    p.name,
-      brand:   p.brand   || '',
-      barcode: p.barcode || '',
-      qty:     p.qty,
-      min:     p.min,
-      unit:    p.unit,
-      cat:     p.cat,
-      exp:     p.exp     || '',
-      src:     p.src     || 'manual',
-      image:   p.image   || '',
-      price:   p.price   || 0,
-      checked: p.checked || false,
-    }))
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const payload = buildPayload();
+  const json = JSON.stringify(payload, null, 2);
+
+  // Si el navegador soporta showSaveFilePicker, ofrecer guardar en la ubicación original
+  if (window.showSaveFilePicker) {
+    window.showSaveFilePicker({
+      suggestedName: 'despensa.json',
+      types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
+    }).then(async handle => {
+      _fileHandle = handle;
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      
+      localStorage.setItem('despensa_v7', JSON.stringify(products));
+      toast(`✓ despensa.json guardado (${products.length} productos)`);
+    }).catch(e => {
+      if (e.name !== 'AbortError') downloadJSONBlob(json, payload);
+    });
+    return;
+  }
+
+  // Fallback: descarga clásica
+  downloadJSONBlob(json, payload);
+}
+
+function downloadJSONBlob(json, payload) {
+  const blob = new Blob([json], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `despensa-stock-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  
   toast(`✓ Exportado ${products.length} productos`);
 }
 
@@ -1686,6 +1849,7 @@ function importStockJSON(input) {
       }
 
       save(); renderStock(); renderStats(); renderShop();
+      setSyncStatus(_fileHandle ? 'synced' : 'local');
       toast(`✓ Importados ${list.length} productos (${mode === 'replace' ? 'reemplazado' : 'fusionado'})`);
     } catch(err) {
       alert('Error al leer el archivo JSON: ' + err.message);
@@ -1745,9 +1909,7 @@ function exportShopCSV() {
 }
 
 // ── Inicializar ───────────────────────────────
-renderStats();
-renderStock();
-renderShop();
+initData();
 </script>
 </body>
 </html>
