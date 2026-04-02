@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "saved": "2026-03-31T11:42:52.038Z",
+  "saved": "2026-04-02T16:38:52.665Z",
   "products": [
     {
       "id": 1774122359835.2917,
@@ -12,7 +12,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2026-10-17",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/59141325.jpeg",
       "price": 1009,
       "checked": false
@@ -27,7 +27,7 @@
       "unit": "unid",
       "cat": "Higiene",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/222262591.jpeg",
       "price": 1090,
       "checked": false
@@ -42,7 +42,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/688603-170-170?v=638907013664570000&width=170&height=170&aspect=true",
       "price": 899,
       "checked": false
@@ -57,7 +57,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2027-05-21",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/830077-140-140?v=639096269616070000&width=140&height=140&aspect=true",
       "price": 1860,
       "checked": false
@@ -72,7 +72,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "2026-10-21",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/570318-140-140?v=638627989314170000&width=140&height=140&aspect=true",
       "price": 789,
       "checked": false
@@ -87,7 +87,7 @@
       "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/822766-140-140?v=639083181838400000&width=140&height=140&aspect=true",
       "price": 1689,
       "checked": false
@@ -102,7 +102,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/537494-170-170?v=638549455207900000&width=170&height=170&aspect=true",
       "price": 1490,
       "checked": false
@@ -117,7 +117,7 @@
       "unit": "unid",
       "cat": "Verduras",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/114806650.jpeg",
       "price": 1290,
       "checked": false
@@ -132,8 +132,8 @@
       "unit": "kg",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
-      "image": "https://carrefourar.vtexassets.com/arquivos/ids/492112-140-140?v=638459583724030000&width=140&height=140&aspect=true",
+      "src": "Carrefour",
+      "image": "https://carrefourar.vtexassets.com/arquivos/ids/843328-170-170?v=639106497245300000",
       "price": 14990,
       "checked": false
     },
@@ -147,7 +147,7 @@
       "unit": "g",
       "cat": "Otro",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/194957700.jpeg",
       "price": 2570.59,
       "checked": false
@@ -162,7 +162,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "2026-08-02",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/386825-140-140?v=638318706171730000&width=140&height=140&aspect=true",
       "price": 1790,
       "checked": false
@@ -177,7 +177,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "2027-02-23",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/117395752.jpeg",
       "price": 1155,
       "checked": false
@@ -192,7 +192,7 @@
       "unit": "unid",
       "cat": "Higiene",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/38239596.jpeg",
       "price": 4129,
       "checked": false
@@ -207,8 +207,8 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
-      "image": "https://carrefourar.vtexassets.com/arquivos/ids/400129-140-140?v=638336829600670000&width=140&height=140&aspect=true",
+      "src": "Carrefour",
+      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/343523-500-auto?v=638732575321700000&width=500&height=auto&aspect=true",
       "price": 2825,
       "checked": false
     },
@@ -222,7 +222,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "2026-11-09",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/604003-140-140?v=638701514078030000&width=140&height=140&aspect=true",
       "price": 949,
       "checked": false
@@ -237,7 +237,7 @@
       "unit": "kg",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/531539-140-140?v=638532779538930000&width=140&height=140&aspect=true",
       "price": 17170,
       "checked": false
@@ -252,7 +252,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/209869974.png",
       "price": 950,
       "checked": false
@@ -267,7 +267,7 @@
       "unit": "unid",
       "cat": "Verduras",
       "exp": "2029-02-21",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/386896-140-140?v=638872509566870000&width=140&height=140&aspect=true",
       "price": 1890,
       "checked": false
@@ -282,7 +282,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2026-11-28",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/213729603.png",
       "price": 2800,
       "checked": false
@@ -297,24 +297,24 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125300771.jpeg",
       "price": 0,
       "checked": false
     },
     {
       "id": 1774122359835.1938,
-      "name": "Chorizo Chistorra",
-      "brand": "",
+      "name": "Chistorra Parrillera Catter Meat 400 Gr.",
+      "brand": "Catter Meat",
       "barcode": "7798260740530",
-      "qty": 1,
+      "qty": 0,
       "min": 1,
       "unit": "unid",
-      "cat": "Almacén",
+      "cat": "Carnes",
       "exp": "",
-      "src": "openfoodfacts",
-      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/362379-500-auto?v=638999201027730000&width=500&height=auto&aspect=true",
-      "price": 0,
+      "src": "dia",
+      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/366981-500-auto?v=639101151233170000&width=500&height=auto&aspect=true",
+      "price": 4700,
       "checked": false
     },
     {
@@ -327,7 +327,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2026-04-21",
-      "src": "openfoodfacts",
+      "src": "Dia",
       "image": "https://ardiaprod.vtexassets.com/arquivos/ids/356708-500-auto?v=638915399669800000&width=500&height=auto&aspect=true",
       "price": 3040.48,
       "checked": false
@@ -342,7 +342,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/83045853.png",
       "price": 0,
       "checked": false
@@ -357,7 +357,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Disco",
       "image": "https://go-upc.s3.amazonaws.com/images/125322561.jpeg",
       "price": 0,
       "checked": false
@@ -372,7 +372,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/609752-140-140?v=638723988339700000&width=140&height=140&aspect=true",
       "price": 2190,
       "checked": false
@@ -384,10 +384,10 @@
       "barcode": "8480017217400",
       "qty": 2,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/225078691.jpeg",
       "price": 3943.65,
       "checked": false
@@ -402,7 +402,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/192623136.jpeg",
       "price": 0,
       "checked": false
@@ -417,7 +417,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/370817739.jpeg",
       "price": 0,
       "checked": false
@@ -429,10 +429,10 @@
       "barcode": "7622201820565",
       "qty": 1,
       "min": 1,
-      "unit": "g",
+      "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/166466155.jpeg",
       "price": 1330,
       "checked": false
@@ -447,7 +447,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/166698159.jpeg",
       "price": 11599,
       "checked": false
@@ -455,15 +455,15 @@
     {
       "id": 1774123011103,
       "name": "Carpano Vermouth Rosso 950 Ml",
-      "brand": "Carpano Vital",
+      "brand": "Carpano - Vital",
       "barcode": "7790290008192",
-      "qty": 1,
+      "qty": 2,
       "min": 1,
-      "unit": "ml",
+      "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
-      "src": "goupc",
-      "image": "https://go-upc.s3.amazonaws.com/images/118359415.png",
+      "src": "Vital",
+      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/316087-1200-auto?v=638599454174170000&width=1200&height=auto&aspect=true",
       "price": 5399,
       "checked": false
     },
@@ -477,7 +477,7 @@
       "unit": "l",
       "cat": "Bebidas",
       "exp": "",
-      "src": "openfoodfacts",
+      "src": "Dia",
       "image": "https://images.openfoodfacts.org/images/products/779/391/301/2996/front_es.24.200.jpg",
       "price": 0,
       "checked": false
@@ -492,7 +492,7 @@
       "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/38175729.png",
       "price": 0,
       "checked": false
@@ -502,12 +502,12 @@
       "name": "Cunnington Gaseosa Indian Tonic Classic X2,25lts",
       "brand": "Cunnington",
       "barcode": "7790639003444",
-      "qty": 15,
+      "qty": 5,
       "min": 1,
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/166738933.jpeg",
       "price": 1437.21,
       "checked": false
@@ -522,7 +522,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/192629126.jpeg",
       "price": 0,
       "checked": false
@@ -537,7 +537,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/194892330.jpeg",
       "price": 0,
       "checked": false
@@ -552,7 +552,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/38180656.png",
       "price": 945,
       "checked": false
@@ -567,7 +567,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://carrefourar.vtexassets.com/arquivos/ids/598979-140-140?v=638685017844500000&width=140&height=140&aspect=true",
       "price": 0,
       "checked": false
@@ -582,7 +582,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/322718992.jpeg",
       "price": 0,
       "checked": false
@@ -592,12 +592,12 @@
       "name": "Seven Up Gaseosa Sin Azúcar 1.5 L",
       "brand": "Seven Up",
       "barcode": "7791813434412",
-      "qty": 1,
+      "qty": 0,
       "min": 1,
       "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/194286573.png",
       "price": 0,
       "checked": false
@@ -612,7 +612,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://static.cotodigital3.com.ar/sitios/fotos/large/00000800/00000806.jpg",
       "price": 17849,
       "checked": false
@@ -627,7 +627,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "2028-02-03",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/228017113.jpeg",
       "price": 0,
       "checked": false
@@ -642,7 +642,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "2027-01-25",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125261214.jpeg",
       "price": 665.56,
       "checked": false
@@ -657,7 +657,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125325715.jpeg",
       "price": 0,
       "checked": false
@@ -672,7 +672,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2028-01-01",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125325065.jpeg",
       "price": 0,
       "checked": false
@@ -687,7 +687,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/120907032.jpeg",
       "price": 0,
       "checked": false
@@ -702,8 +702,8 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
-      "image": "",
+      "src": "Coto",
+      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/312384-500-auto?v=638828521065730000&width=500&height=auto&aspect=true",
       "price": 0,
       "checked": false
     },
@@ -717,7 +717,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/166525491.jpeg",
       "price": 0,
       "checked": false
@@ -732,7 +732,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/374745721.jpeg",
       "price": 0,
       "checked": false
@@ -747,7 +747,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "2026-07-27",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125263542.jpeg",
       "price": 840,
       "checked": false
@@ -762,7 +762,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2026-04-26",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/131117011.jpeg",
       "price": 1030,
       "checked": false
@@ -777,7 +777,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "2026-07-06",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125260900.png",
       "price": 2159,
       "checked": false
@@ -792,7 +792,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "2027-01-14",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/216456831.jpeg",
       "price": 1572.74,
       "checked": false
@@ -807,7 +807,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "2026-10-15",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/166516042.jpeg",
       "price": 2350,
       "checked": false
@@ -822,7 +822,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/393812462.jpeg",
       "price": 1145,
       "checked": false
@@ -837,7 +837,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/59201301.jpeg",
       "price": 1825,
       "checked": false
@@ -852,7 +852,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/323779649.webp",
       "price": 3500,
       "checked": false
@@ -867,7 +867,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125370719.jpeg",
       "price": 1400,
       "checked": false
@@ -882,7 +882,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "goupc",
+      "src": "Disco",
       "image": "https://go-upc.s3.amazonaws.com/images/59146359.jpeg",
       "price": 14500,
       "checked": false
@@ -897,7 +897,7 @@
       "unit": "kg",
       "cat": "Carnes",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/122963204.jpeg",
       "price": 9119,
       "checked": false
@@ -912,7 +912,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/308020780.jpeg",
       "price": 500,
       "checked": false
@@ -927,7 +927,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/311112790.jpeg",
       "price": 1300,
       "checked": false
@@ -942,7 +942,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/117528432.jpeg",
       "price": 2849,
       "checked": false
@@ -957,7 +957,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/59187665.jpeg",
       "price": 6990,
       "checked": false
@@ -972,7 +972,7 @@
       "unit": "kg",
       "cat": "Lácteos",
       "exp": "",
-      "src": "goupc",
+      "src": "Disco",
       "image": "https://static.cotodigital3.com.ar/sitios/fotos/mini/00000100/00000161.jpg",
       "price": 12899,
       "checked": false
@@ -987,7 +987,7 @@
       "unit": "g",
       "cat": "Lácteos",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/125290545.jpeg",
       "price": 2930,
       "checked": false
@@ -1002,7 +1002,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/72735193.webp",
       "price": 0,
       "checked": false
@@ -1017,7 +1017,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/109689500.jpeg",
       "price": 1,
       "checked": false
@@ -1032,7 +1032,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/323063477.jpeg",
       "price": 3529,
       "checked": false
@@ -1047,7 +1047,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/40347257.jpg",
       "price": 0,
       "checked": false
@@ -1062,7 +1062,7 @@
       "unit": "kg",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Coto",
       "image": "https://go-upc.s3.amazonaws.com/images/59208344.jpeg",
       "price": 4190,
       "checked": false
@@ -1077,7 +1077,7 @@
       "unit": "g",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Disco",
       "image": "https://go-upc.s3.amazonaws.com/images/427673871.jpeg",
       "price": 0,
       "checked": false
@@ -1092,7 +1092,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "goupc",
+      "src": "Otro",
       "image": "https://go-upc.s3.amazonaws.com/images/167468289.jpeg",
       "price": 0,
       "checked": false
@@ -1107,7 +1107,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Dia",
       "image": "https://go-upc.s3.amazonaws.com/images/239816508.png",
       "price": 1584.31,
       "checked": false
@@ -1122,7 +1122,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125301422.jpeg",
       "price": 1919.5,
       "checked": false
@@ -1137,7 +1137,7 @@
       "unit": "ml",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125328101.jpeg",
       "price": 1929.15,
       "checked": false
@@ -1152,7 +1152,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/194887937.jpeg",
       "price": 569.1,
       "checked": false
@@ -1167,7 +1167,7 @@
       "unit": "unid",
       "cat": "Bebidas",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125342879.jpeg",
       "price": 1475.8,
       "checked": false
@@ -1182,7 +1182,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/194436982.jpeg",
       "price": 2604.35,
       "checked": false
@@ -1197,7 +1197,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/137741700.jpeg",
       "price": 571.51,
       "checked": false
@@ -1212,7 +1212,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/193603848.jpeg",
       "price": 1901.17,
       "checked": false
@@ -1227,7 +1227,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/192723763.jpeg",
       "price": 1109.26,
       "checked": false
@@ -1242,7 +1242,7 @@
       "unit": "ml",
       "cat": "Limpieza",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/82461143.png",
       "price": 6156.24,
       "checked": false
@@ -1257,7 +1257,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/195427828.jpeg",
       "price": 1581.9,
       "checked": false
@@ -1272,7 +1272,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/346728891.jpeg",
       "price": 1823.04,
       "checked": false
@@ -1287,7 +1287,7 @@
       "unit": "unid",
       "cat": "Limpieza",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/117518328.jpeg",
       "price": 1909.85,
       "checked": false
@@ -1302,7 +1302,7 @@
       "unit": "unid",
       "cat": "Lácteos",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125292855.jpeg",
       "price": 2090.71,
       "checked": false
@@ -1317,7 +1317,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125266778.jpeg",
       "price": 954.93,
       "checked": false
@@ -1332,7 +1332,7 @@
       "unit": "unid",
       "cat": "Frutas",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125265124.jpeg",
       "price": 1919.5,
       "checked": false
@@ -1347,7 +1347,7 @@
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/273274910.jpeg",
       "price": 1784.46,
       "checked": false
@@ -1362,9 +1362,39 @@
       "unit": "unid",
       "cat": "Otro",
       "exp": "",
-      "src": "factura",
+      "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/125306754.jpeg",
       "price": 1794.11,
+      "checked": false
+    },
+    {
+      "id": 1775143036945,
+      "name": "Pila Recargable Aa PHILCO 2 Unidades 1.2V 2000mA",
+      "brand": "Philco",
+      "barcode": "7799111039414",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Otro",
+      "exp": "",
+      "src": "Coto",
+      "image": "https://static.cotodigital3.com.ar/sitios/fotos/large/00602000/00602069.jpg",
+      "price": 7699,
+      "checked": false
+    },
+    {
+      "id": 1775143120388.758,
+      "name": "Armargo Obrero",
+      "brand": "Obrero",
+      "barcode": "",
+      "qty": 1,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Bebidas",
+      "exp": "",
+      "src": "Vital",
+      "image": "https://ardiaprod.vtexassets.com/arquivos/ids/314032-1200-auto?v=638599422302500000&width=1200&height=auto&aspect=true",
+      "price": 3799,
       "checked": false
     }
   ]
