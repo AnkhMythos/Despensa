@@ -256,6 +256,27 @@ button,input,select{font-family:inherit}
 .shop-price{font-size:var(--fs-xs);color:var(--text3);margin-top:1px}
 .shop-price b{color:var(--amber);font-weight:700}
 
+/* Comercio badge en lista de compras */
+.shop-comercio{display:inline-flex;align-items:center;font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:10px;background:var(--surface2);color:var(--text3);
+  border:1px solid var(--border);margin-top:2px;white-space:nowrap}
+
+/* Controles de ordenamiento */
+.sort-tabs{display:flex;gap:6px;align-items:center}
+.sort-tab{font-size:var(--fs-xs);font-weight:700;padding:5px 11px;border-radius:16px;
+  border:1.5px solid var(--border);background:var(--surface);color:var(--text2);
+  cursor:pointer;white-space:nowrap;transition:all .15s}
+.sort-tab.active{background:var(--green);border-color:var(--green);color:#fff}
+.sort-tab:active{opacity:.8}
+
+/* Cabecera de grupo */
+.shop-group-header{font-size:var(--fs-xs);font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.07em;padding:10px 0 6px;
+  border-bottom:1.5px solid var(--border);margin-bottom:2px;
+  display:flex;align-items:center;gap:6px}
+.shop-group-count{font-size:10px;font-weight:700;background:var(--surface2);
+  color:var(--text3);border-radius:10px;padding:1px 7px;border:1px solid var(--border)}
+
 /* Barra de enriquecimiento */
 .enrich-bar{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;margin-top:10px}
 .enrich-bar-title{font-size:var(--fs-sm);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;color:var(--text2)}
@@ -434,12 +455,21 @@ Ejemplo:
           <div class="shop-title">Lista de compras</div>
           <div class="shop-subtitle" id="shop-subtitle"></div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
           <button class="tool-btn" onclick="exportShopCSV()" title="Descargar lista de compras">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Exportar
           </button>
           <button class="btn" style="width:auto;padding:10px 16px;margin-top:0" onclick="clearChecked()">Limpiar ✓</button>
+        </div>
+      </div>
+      <!-- Ordenamiento -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <span style="font-size:var(--fs-xs);color:var(--text3);font-weight:700">Ordenar:</span>
+        <div class="sort-tabs">
+          <button class="sort-tab active" id="sort-urgencia" onclick="setShopSort('urgencia',this)">⚠ Urgencia</button>
+          <button class="sort-tab" id="sort-comercio" onclick="setShopSort('comercio',this)">🏪 Comercio</button>
+          <button class="sort-tab" id="sort-categoria" onclick="setShopSort('categoria',this)">📦 Categoría</button>
         </div>
       </div>
       <div id="shop-list"></div>
@@ -515,6 +545,22 @@ Ejemplo:
         </div>
       </div>
       <div class="field"><label>Fecha de vencimiento (opcional)</label><input type="date" id="f-exp"></div>
+
+      <div class="field"><label>Comercio</label>
+          <select id="f-src">
+            <!-- <option value="factura">Factura</option> -->
+            <option value="Carrefour">Carrefour</option>
+            <option value="Dia">%Día</option>
+            <option value="Coto">Coto</option>
+            <option value="Disco">Disco</option>
+            <option value="Jumbo">Jumbo</option>
+            <option value="Vital">Vital</option>
+            <option value="Verduleria">Verdulería</option>
+            <option value="Fiambreria">Fiambrería</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
       <div class="field">
         <label>Precio unitario ARS (opcional)</label>
         <input type="number" id="f-price" min="0" step="0.01" inputmode="decimal" placeholder="Ej: 1590.00">
@@ -539,6 +585,8 @@ Ejemplo:
 let products      = [];
 let activeFilter  = 'todos';
 let pendingSource = 'manual';
+
+document.getElementById('f-src').addEventListener('change', e => { pendingSource = e.target.value; });
 
 // File System Access API handle — Chrome/Edge desktop
 // Cuando está activo, cada save() escribe directo al archivo del disco.
@@ -800,6 +848,7 @@ function renderStock() {
         <div style="display:flex;align-items:center;gap:4px">
           ${expH}
           <button class="edit-btn" onclick="openEdit(${p.id})" title="Editar producto" aria-label="Editar">✏️</button>
+          <button class="edit-btn" onclick="openComparador(${p.id})" title="Comparar precios en supermercados" aria-label="Comparar precios" style="font-size:15px;font-weight:900;color:var(--green)">$</button>
           <button class="del-btn" onclick="deleteProduct(${p.id})" aria-label="Eliminar">🗑</button>
         </div>
       </div>
@@ -1122,6 +1171,7 @@ function sourcePill(s) {
   if (s === 'openfoodfacts') return '<span class="pill pill-blue">Open Food Facts</span>';
   if (s === 'preciosclaros') return '<span class="pill pill-pc">Precios Claros AR</span>';
   if (s === 'factura')       return '<span class="pill pill-purple">📄 Factura</span>';
+  if (s && s !== 'manual')   return `<span class="pill" style="background:var(--surface2);color:var(--text2);font-size:var(--fs-xs)">🏪 ${s}</span>`;
   return '';
 }
 
@@ -1249,6 +1299,8 @@ function _fillModal({ name='', brand='', barcode='', qty=1, min=1, unit='unid',
   [...uSel.options].forEach(o => { o.selected = o.value === unit; });
   const cSel = document.getElementById('f-cat');
   [...cSel.options].forEach(o => { o.selected = o.value === cat; });
+  const sSel = document.getElementById('f-src');
+  [...sSel.options].forEach(o => { o.selected = o.value === src; });
   previewModalImage(image);
   pendingSource = src;
   window._pendingImage = image;
@@ -1350,35 +1402,160 @@ function saveOrUpdateProduct() {
 }
 
 // ── Lista de compras ──────────────────────────
+let shopSort = 'urgencia'; // 'urgencia' | 'comercio' | 'categoria'
+
+function setShopSort(mode, el) {
+  shopSort = mode;
+  document.querySelectorAll('.sort-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderShop();
+}
+
+// Etiqueta legible del comercio (src puede ser 'factura', 'Carrefour', 'goupc', etc.)
+function comercioLabel(src) {
+  if (!src || src === 'manual')        return 'Sin comercio';
+  if (src === 'factura')               return 'Factura';
+  if (src === 'goupc')                 return 'go-upc';
+  if (src === 'openfoodfacts')         return 'Open Food Facts';
+  if (src === 'preciosclaros')         return 'Precios Claros';
+  if (src === 'dia')                   return '%DIA';
+  // Valores directos del selector de comercio del modal
+  return src; // 'Carrefour', 'Coto', 'Disco', 'Jumbo', 'Vital', etc.
+}
+
 function renderShop() {
-  const needed = products.filter(p=>p.qty<=p.min).sort((a,b)=>(statusOf(a)==='out'?0:1)-(statusOf(b)==='out'?0:1));
-  const badge=document.getElementById('shop-badge');
-  if (needed.length) { badge.style.display='flex'; badge.textContent=needed.length; }
-  else { badge.style.display='none'; }
-  document.getElementById('shop-subtitle').textContent=`${needed.length} artículo${needed.length!==1?'s':''} por comprar`;
-  const el=document.getElementById('shop-list');
-  if (!needed.length) { el.innerHTML='<div class="empty"><div class="empty-icon">🎉</div>¡Todo el stock está al día!</div>'; return; }
-  el.innerHTML=needed.map(p=>{
-    const s=statusOf(p),sug=s==='out'?Math.max(p.min*2,2):p.min-p.qty+p.min;
+  const needed = products.filter(p => p.qty <= p.min);
+  const badge = document.getElementById('shop-badge');
+  if (needed.length) { badge.style.display = 'flex'; badge.textContent = needed.length; }
+  else { badge.style.display = 'none'; }
+
+  const out = needed.filter(p => statusOf(p) === 'out').length;
+  const low = needed.filter(p => statusOf(p) === 'low').length;
+  document.getElementById('shop-subtitle').textContent =
+    `${needed.length} artículo${needed.length !== 1 ? 's' : ''} · ${out} sin stock · ${low} stock bajo`;
+
+  const el = document.getElementById('shop-list');
+  if (!needed.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🎉</div>¡Todo el stock está al día!</div>';
+    return;
+  }
+
+  // ── Construir ítem HTML individual ─────────────────
+  function itemHTML(p) {
+    const s = statusOf(p);
+    const sug = s === 'out' ? Math.max(p.min * 2, 2) : p.min - p.qty + p.min;
     const priceH = p.price > 0
       ? `<div class="shop-price">Últ. precio: <b>${fmtARS(p.price)}</b></div>` : '';
     const shopImg = p.image
       ? `<img src="${p.image}" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--surface2);flex-shrink:0" loading="lazy" onerror="this.style.display='none'">`
       : '';
+    const comercioH = shopSort !== 'comercio'
+      ? `<div class="shop-comercio">🏪 ${comercioLabel(p.src)}</div>` : '';
+    const catH = shopSort !== 'categoria'
+      ? `<div class="shop-comercio" style="background:transparent;border-color:transparent;color:var(--text3);padding:0;font-size:10px">${p.cat}</div>` : '';
+    const searchBtn = `<button class="shop-search-btn" onclick="searchSuperPrecio(${p.id})" title="Buscar en Superprecio.ar" style="background:none;border:none;font-size:16px;cursor:pointer;color:var(--text2);padding:6px;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text2)'">$</button>`;
     return `<div class="shop-item">
-      <div class="shop-check ${p.checked?'checked':''}" onclick="toggleCheck(${p.id})">${p.checked?'✓':''}</div>
+      <div class="shop-check ${p.checked ? 'checked' : ''}" onclick="toggleCheck(${p.id})">${p.checked ? '✓' : ''}</div>
       ${shopImg}
       <div style="flex:1;min-width:0">
-        <div class="shop-name ${p.checked?'done':''}">${p.name}</div>
-        <div class="shop-sub">${p.brand||''} · Comprar ~${sug} ${p.unit}</div>
+        <div class="shop-name ${p.checked ? 'done' : ''}">${p.name}</div>
+        <div class="shop-sub">${p.brand || ''} · Comprar ~${sug} ${p.unit}</div>
         ${priceH}
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:2px">
+          ${comercioH}${catH}
+        </div>
       </div>
-      <span class="urgency ${s==='out'?'urg-out':'urg-low'}">${s==='out'?'Sin stock':'Bajo'}</span>
+      ${searchBtn}
+      <span class="urgency ${s === 'out' ? 'urg-out' : 'urg-low'}">${s === 'out' ? 'Sin stock' : 'Bajo'}</span>
     </div>`;
-  }).join('');
+  }
+
+  // ── Renderizado por modo de orden ──────────────────
+  if (shopSort === 'urgencia') {
+    // Sin stock primero, luego stock bajo, ambos alfabéticos
+    const sorted = [...needed].sort((a, b) => {
+      const sa = statusOf(a) === 'out' ? 0 : 1;
+      const sb = statusOf(b) === 'out' ? 0 : 1;
+      if (sa !== sb) return sa - sb;
+      return a.name.localeCompare(b.name, 'es');
+    });
+    el.innerHTML = sorted.map(itemHTML).join('');
+
+  } else if (shopSort === 'comercio') {
+    // Agrupar por comercio (src), ordenar grupos alfabéticamente
+    const groups = {};
+    needed.forEach(p => {
+      const key = comercioLabel(p.src);
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(p);
+    });
+    // Ordenar ítems dentro de cada grupo por urgencia → nombre
+    Object.values(groups).forEach(g => g.sort((a, b) => {
+      const sa = statusOf(a) === 'out' ? 0 : 1;
+      const sb = statusOf(b) === 'out' ? 0 : 1;
+      if (sa !== sb) return sa - sb;
+      return a.name.localeCompare(b.name, 'es');
+    }));
+    const sortedKeys = Object.keys(groups).sort((a, b) => {
+      // "Sin comercio" siempre al final
+      if (a === 'Sin comercio') return 1;
+      if (b === 'Sin comercio') return -1;
+      return a.localeCompare(b, 'es');
+    });
+    el.innerHTML = sortedKeys.map(key => {
+      const items = groups[key];
+      const outCount = items.filter(p => statusOf(p) === 'out').length;
+      const badge = outCount ? `<span class="shop-group-count" style="background:var(--red-bg);color:var(--red);border-color:var(--red)">${outCount} sin stock</span>` : `<span class="shop-group-count">${items.length}</span>`;
+      return `<div class="shop-group-header">🏪 ${key} ${badge}</div>
+        ${items.map(itemHTML).join('')}`;
+    }).join('');
+
+  } else if (shopSort === 'categoria') {
+    // Agrupar por categoría
+    const groups = {};
+    needed.forEach(p => {
+      const key = p.cat || 'Otro';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(p);
+    });
+    Object.values(groups).forEach(g => g.sort((a, b) => {
+      const sa = statusOf(a) === 'out' ? 0 : 1;
+      const sb = statusOf(b) === 'out' ? 0 : 1;
+      if (sa !== sb) return sa - sb;
+      return a.name.localeCompare(b.name, 'es');
+    }));
+    // Orden de categorías útil para el supermercado
+    const CAT_ORDER = ['Lácteos','Carnes','Verduras','Frutas','Bebidas','Almacén','Limpieza','Higiene','Otro'];
+    const sortedKeys = Object.keys(groups).sort((a, b) => {
+      const ia = CAT_ORDER.indexOf(a);
+      const ib = CAT_ORDER.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b, 'es');
+    });
+    const CAT_EMOJI = {Lácteos:'🥛',Carnes:'🥩',Verduras:'🥦',Frutas:'🍎',Bebidas:'🧃',Almacén:'🛒',Limpieza:'🧹',Higiene:'🧴',Otro:'📦'};
+    el.innerHTML = sortedKeys.map(key => {
+      const items = groups[key];
+      const outCount = items.filter(p => statusOf(p) === 'out').length;
+      const badge = outCount ? `<span class="shop-group-count" style="background:var(--red-bg);color:var(--red);border-color:var(--red)">${outCount} sin stock</span>` : `<span class="shop-group-count">${items.length}</span>`;
+      return `<div class="shop-group-header">${CAT_EMOJI[key]||'📦'} ${key} ${badge}</div>
+        ${items.map(itemHTML).join('')}`;
+    }).join('');
+  }
 }
 function toggleCheck(id) { const p=products.find(x=>x.id===id); if(p){p.checked=!p.checked;save();renderShop();} }
 function clearChecked() { products.forEach(p=>{if(p.checked)p.checked=false;}); save();renderShop(); }
+function searchSuperPrecio(id) {
+  const p = products.find(x => x.id === id);
+  if (!p || !p.name) {
+    toast('Este producto no tiene nombre');
+    return;
+  }
+  const query = [p.brand, p.name].filter(Boolean).join(' ').toUpperCase();
+  const url = `https://superprecio.ar/searchgrouped?search=${encodeURIComponent(query)}&longitude=&latitude=&city=Capital+Federal`;
+  window.open(url, '_blank');
+}
 
 // ── Navegación ────────────────────────────────
 function goPage(name) {
@@ -1895,17 +2072,43 @@ function downloadCSV(filename, rows) {
 
 function exportShopCSV() {
   const needed = products.filter(p => p.qty <= p.min)
-    .sort((a,b) => (statusOf(a)==='out'?0:1)-(statusOf(b)==='out'?0:1));
+    .sort((a,b) => {
+      if (shopSort === 'comercio') return comercioLabel(a.src).localeCompare(comercioLabel(b.src),'es');
+      if (shopSort === 'categoria') return (a.cat||'').localeCompare(b.cat||'','es');
+      return (statusOf(a)==='out'?0:1)-(statusOf(b)==='out'?0:1);
+    });
   if (!needed.length) { toast('La lista de compras está vacía'); return; }
-  const header = ['Producto','Marca','Categoría','Stock actual','Unidad','Comprar (sugerido)','Precio unitario ARS','Total estimado ARS','Urgencia'];
+  const header = ['Producto','Marca','Categoría','Comercio','Stock actual','Unidad','Comprar (sugerido)','Precio unitario ARS','Total estimado ARS','Urgencia'];
   const rows = [header, ...needed.map(p => {
     const s = statusOf(p);
     const sug = s==='out' ? Math.max(p.min*2,2) : p.min - p.qty + p.min;
     const total = p.price ? (p.price * sug).toFixed(2) : '';
-    return [p.name, p.brand||'', p.cat, p.qty, p.unit, sug, p.price||'', total, s==='out'?'Sin stock':'Stock bajo'];
+    return [p.name, p.brand||'', p.cat, comercioLabel(p.src), p.qty, p.unit, sug, p.price||'', total, s==='out'?'Sin stock':'Stock bajo'];
   })];
   const date = new Date().toISOString().slice(0,10);
   downloadCSV(`despensa-compras-${date}.csv`, rows);
+}
+
+// ── Comparador de precios ─────────────────────
+function openComparador(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+
+  // Necesitamos al menos nombre para buscar
+  if (!p.name) {
+    toast('Este producto no tiene nombre');
+    return;
+  }
+
+  // Abrir directamente en Precio Super
+  const query = encodeURIComponent(p.name + (p.brand ? ' ' + p.brand : ''));
+  const url = `https://www.preciosuper.com/?q=${query}`;
+
+  const win = window.open(url, '_blank');
+
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    window.location.href = url;
+  }
 }
 
 // ── Inicializar ───────────────────────────────
