@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "saved": "2026-04-03T02:16:21.229Z",
+  "saved": "2026-04-03T16:22:46.953Z",
   "products": [
     {
       "id": 1774122359835.2917,
@@ -410,7 +410,7 @@
     {
       "id": 1774122359835.8135,
       "name": "Pizzitos Bulnez 120 G",
-      "brand": "",
+      "brand": "Bulnes",
       "barcode": "7791720038031",
       "qty": 0,
       "min": 1,
@@ -419,7 +419,7 @@
       "exp": "",
       "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/370817739.jpeg",
-      "price": 0,
+      "price": 1431,
       "checked": false
     },
     {
@@ -922,7 +922,7 @@
       "name": "Krachitos Papas Fritas Corte Americano 50 Grs",
       "brand": "Krachitos",
       "barcode": "7794520869324",
-      "qty": 1,
+      "qty": 0,
       "min": 1,
       "unit": "unid",
       "cat": "Almacén",
@@ -1475,16 +1475,16 @@
     {
       "id": 1775181789800,
       "name": "Turrón de Maní 25 gr. Nevares",
-      "brand": "",
-      "barcode": "",
+      "brand": "Nevares",
+      "barcode": "77923523",
       "qty": 0,
       "min": 1,
       "unit": "unid",
       "cat": "Almacén",
       "exp": "",
-      "src": "Dia",
-      "image": "",
-      "price": 389,
+      "src": "Coto",
+      "image": "https://static.cotodigital3.com.ar/sitios/fotos/large/00562300/00562306.jpg",
+      "price": 289,
       "checked": false
     },
     {
@@ -1500,6 +1500,36 @@
       "src": "Carrefour",
       "image": "https://go-upc.s3.amazonaws.com/images/37794814.jpeg",
       "price": 1694,
+      "checked": false
+    },
+    {
+      "id": 1775233335155.8682,
+      "name": "Oliovita Aceite De Oliva Extra Virgen 500ml",
+      "brand": "Oliovita",
+      "barcode": "7798061190312",
+      "qty": 1,
+      "min": 1,
+      "unit": "ml",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "Carrefour",
+      "image": "https://go-upc.s3.amazonaws.com/images/166700511.jpeg",
+      "price": 13259,
+      "checked": false
+    },
+    {
+      "id": 1775233335155.1357,
+      "name": "Nevares Turron Fantasia 80g",
+      "brand": "Nevares",
+      "barcode": "7798094221731",
+      "qty": 0,
+      "min": 1,
+      "unit": "unid",
+      "cat": "Almacén",
+      "exp": "",
+      "src": "Otro",
+      "image": "https://distribuidoramif.com.ar/wp-content/uploads/2026/04/dda5f9f9-8ec7-4029-b503-037c3a5a9465.jpeg",
+      "price": 550,
       "checked": false
     }
   ]
